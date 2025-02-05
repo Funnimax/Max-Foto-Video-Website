@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Max Behr Portfolio</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Arial, sans-serif;
+        }
+
+
+        body {
+            background-color: #111;
+            color: white;
+            text-align: center;
+            padding-top: 80px;
+        }
+
+        h2 {
+            font-family: "Bebas Neue";
+            font-size: 50px;
+            font-weight: lighter;
+        }
+
+        video{
+            aspect-ratio: 20/5;
+        }
+        
+        .navbar {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            height: 80px;
+            background: black;
+            padding: 15px;
+            text-align: center;
+            font-size: 24px;
+            font-weight: bold;
+            z-index: 1000;
+        }
+        
+
+
+        .projects {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            flex-wrap: wrap;
+            opacity: 0;
+            transform: translateY(30px);
+            animation: fadeIn 1.5s forwards ease-in-out;
+        }
+
+        .projects img {
+            width: 300px;
+            margin-bottom: 50px;
+            height: auto;
+            border-radius: 10px;
+        }
+
+        .dark-section {
+            background: #0e0e0e;
+            color: white;
+        }
+
+        .light-section {
+            background: #ddd;
+            color: black;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .footer {
+            background: #000000;
+            padding-top: 100px;
+            padding-bottom: 100px;
+            font-size: 14px;
+        }
+
+        .social_logo{
+            text-align: center;
+            padding-right: 50px;
+        }
+
+        .legal {
+        text-align: right;
+        }
+
+        footer .footer .socials img {
+            width: 30px;
+            height: 30px;
+            margin: 0 10px;
+        }
+
+        h2{
+            padding-top: 100px;
+            padding-bottom: 50px;
+        }
+
+            footer .footer .socials {
+        display: flex;
+        justify-content: space-between;
+        width: 100px;
+        margin: 0 auto;
+    }
+
+
+    </style>
+</head>
+<body>
+    <nav>
+        <div class="navbar">Max Behr</div>
+    </nav>
+
+        <section class="video-section">
+            <video id="bgVideo" controls preload="true" autoplay loop muted>
+                <source src="video/WebVideo.mp4" type="video/mp4" /> 
+            </video>
+        </section>
+        
+        <section>
+            <div class="content">
+                <div class="section dark-section">
+                 <h2>RECENT PROJECTS</h2>
+                    <div class="projects">
+                        <img src="pictures/Example_Square.png" alt="Project 4">
+                        <img src="pictures/Example_Portrait.png" alt="Project 5">
+                        <img src="pictures/Example.png" alt="Project 6">
+                    </div>
+                </div>
+        </section>
+      
+        
+        <section>
+
+            
+            <div class="content">
+
+                <div class="section light-section">
+                    <h2>RECENT PROJECTS</h2>
+                    <div class="projects">
+                        <img src="pictures/Example_Square.png" alt="Project 4">
+                        <img src="pictures/Example_Portrait.png" alt="Project 5">
+                        <img src="pictures/Example.png" alt="Project 6">
+                    </div>
+                </div>
+            </section>  
+            <section>
+
+                
+                <div class="content">
+                    <div class="section dark-section">
+                        <h2>RECENT PROJECTS</h2>
+                        <div class="projects">
+                            <img src="pictures/Example_Square.png" alt="Project 4">
+                            <img src="pictures/Example_Portrait.png" alt="Project 5">
+                            <img src="pictures/Example.png" alt="Project 6">
+                        </div>
+                    </div>
+                </section>    
+                <section>
+
+                    
+                    <div class="content">
+                        <div class="section light-section">
+                            <h2>RECENT PROJECTS</h2>
+                            <div class="projects">
+                                <img src="pictures/Example_Square.png" alt="Project 4">
+                                <img src="pictures/Example_Portrait.png" alt="Project 5">
+                                <img src="pictures/Example.png" alt="Project 6">
+                            </div>
+                        </div>
+                    </section>  
+        
+                    <footer>
+                        <div class="footer">
+                            <div class="socials">
+                                <div><a href="https://www.linkedin.com/in/max-behr-267695304/"><img src="assets/used/LinkedInLogo.png"></a></div>
+                                <div><a href="https://www.instagram.com/maxbehrfoto/"><img src="assets/used/InstagramLogo.svg"></a></div>
+                            </div>        
+                            <div class= "legal">&copy; Max Behr</div>
+                        </div>
+                    </footer>   
+</body>
+</html>
