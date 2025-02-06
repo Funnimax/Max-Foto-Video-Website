@@ -25,113 +25,283 @@
             font-family: "Bebas Neue";
             font-size: 50px;
             font-weight: lighter;
-        }
-
-        video{
-            aspect-ratio: 20/5;
-        }
-        
-        .navbar {
-            position: fixed;
-            top: 0;
-            width: 100%;
-            height: 80px;
-            background: black;
-            padding: 15px;
-            text-align: center;
-            font-size: 24px;
-            font-weight: bold;
-            z-index: 1000;
-        }
-        
-
-
-        .projects {
-            display: flex;
-            justify-content: center;
-            gap: 20px;
-            flex-wrap: wrap;
-            opacity: 0;
-            transform: translateY(30px);
-            animation: fadeIn 1.5s forwards ease-in-out;
-        }
-
-        .projects img {
-            width: 300px;
-            margin-bottom: 50px;
-            height: auto;
-            border-radius: 10px;
-        }
-
-        .dark-section {
-            background: #0e0e0e;
-            color: white;
-        }
-
-        .light-section {
-            background: #ddd;
-            color: black;
-        }
-
-        @keyframes fadeIn {
-            from {
-                opacity: 0;
-                transform: translateY(30px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-
-        .footer {
-            background: #000000;
-            padding-top: 100px;
-            padding-bottom: 100px;
-            font-size: 14px;
-        }
-
-        .social_logo{
-            text-align: center;
-            padding-right: 50px;
-        }
-
-        .legal {
-        text-align: right;
-        }
-
-        footer .footer .socials img {
-            width: 30px;
-            height: 30px;
-            margin: 0 10px;
-        }
-
-        h2{
             padding-top: 100px;
             padding-bottom: 50px;
         }
 
-            footer .footer .socials {
-        display: flex;
-        justify-content: space-between;
-        width: 100px;
-        margin: 0 auto;
+        h1{
+            font-family: "Bebas Neue";
+            font-size: 50px;
+            font-weight: lighter;
+            padding: 10px;
+        }
+
+        .videoprojlink{
+            color: white;
+            text-decoration: none;
+            padding: 10px;
+            transition: color 0.3s ease, letter-spacing 0.3s ease;
+            letter-spacing: 0px;            
+        }
+
+
+        .videoprojlink:hover {
+        letter-spacing: 2px;
+        color: rgb(255, 255, 255); 
+}
+
+        .video-container {
+        position: relative;
+        width: 100%;
+        overflow: hidden;
+        }
+
+        /* Style the video */
+        .bgVideo {
+        width: 100%;
+        transition: filter 0.3s ease;
+        }
+
+        /* Dim the video on hover */
+        .video-container:hover .bgVideo {
+        filter: brightness(80%);
+        }
+
+        /* Style the overlay text */
+        .overlay-text {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        color: #fff;
+        font-size: 24px;
+        opacity: 0;
+        transition: opacity 0.3s ease;
+        }
+
+        /* Show the text when hovering over the container */
+        .video-container:hover .overlay-text {
+        opacity: 0.5;
+        }
+
+    .overlay-text:hover {
+    opacity: 1 !important; /* Ensures full visibility */
+    transition: opacity 0.3s ease;
+
     }
+
+/* Navbar container */
+.navbar {
+  position: fixed;
+  top: 0;
+  width: 100%;
+  height: 80px;
+  background: black;
+  padding: 15px;
+  font-size: 40px;
+  font-weight: bold;
+  font-family: "Bebas Neue";
+  z-index: 1000;
+  display: flex;
+  align-items: center;
+  justify-content: center; /* Center everything */
+}
+
+/* Left and Right menus */
+.menu-left, 
+.menu-right {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+/* Left menu (hamburger) */
+.menu-left {
+  left: 20px;
+}
+
+/* Right menu (contact button) */
+.menu-right {
+  right: 20px;
+}
+
+
+/* Hamburger container for relative positioning of dropdown */
+.hamburger-container {
+  position: relative;
+}
+
+/* Hamburger icon styling */
+.hamburger-icon {
+  cursor: pointer;
+  color: white;
+  font-size: 40px;
+  user-select: none;
+}
+
+/* Dropdown menu hidden by default */
+.dropdown-menu {
+  display: none;
+  position: absolute;
+  top: 100%; /* Position below the hamburger icon */
+  left: 0;
+  background: #222;
+  padding: 10px;
+  border-radius: 4px;
+  flex-direction: column;
+}
+
+/* Display dropdown on hover */
+.hamburger-container:hover .dropdown-menu {
+  display: flex;
+}
+
+/* Dropdown link styling */
+.dropdown-menu a {
+  color: white;
+  text-decoration: none;
+  font-size: 20px;
+  padding: 5px 0;
+  white-space: nowrap;
+}
+
+/* Contact button styling */
+.contact-button {
+    color: rgb(255, 255, 255);
+    font-size: 15px;
+    text-decoration: none;
+    padding: 5px 10px;
+    border: 1px solid rgb(255, 255, 255);
+    border-radius: 10px;
+    transition: background 0.3s ease, color 0.3s ease;
+}
+
+/* Hover effect for the contact button */
+.contact-button:hover {
+  background: white;
+  color: black;
+
+}
+
+        
+
+
+.projects {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    flex-wrap: wrap;
+    opacity: 0;
+    transform: translateY(30px);
+    animation: fadeIn 1.5s forwards ease-in-out;
+}
+
+.projects img {
+    width: 300px;
+    margin-bottom: 50px;
+    height: auto;
+    border-radius: 10px;
+}
+
+.dark-section {
+    background: #0e0e0e;
+    color: white;
+}
+
+.light-section {
+    background: #ddd;
+    color: black;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.footer {
+    background: #000000;
+    padding-top: 100px;
+    padding-bottom: 100px;
+    font-size: 14px;
+}
+
+.social_logo{
+    text-align: center;
+    padding-right: 50px;
+}
+
+.legal {
+text-align: right;
+}
+
+footer .footer .socials img {
+    width: 30px;
+    height: 30px;
+    margin: 0 10px;
+}
+
+footer .footer .socials {
+display: flex;
+justify-content: space-between;
+width: 100px;
+margin: 0 auto;
+}
 
 
     </style>
 </head>
 <body>
-    <nav>
-        <div class="navbar">Max Behr</div>
-    </nav>
 
-        <section class="video-section">
-            <video id="bgVideo" controls preload="true" autoplay loop muted>
-                <source src="video/WebVideo.mp4" type="video/mp4" /> 
-            </video>
-        </section>
-        
+
+    <nav>
+        <div class="navbar">
+          <!-- Left: Hamburger Menu -->
+          <div class="menu-left">
+            <div class="hamburger-container">
+              <span class="hamburger-icon">&#9776;</span>
+              <div class="dropdown-menu">
+                <a href="https://yourphotographywebsite.com" target="_blank">Photography</a>
+                <a href="https://yourvideographywebsite.com" target="_blank">Videography</a>
+              </div>
+            </div>
+          </div>
+      
+          <!-- Center: Title -->
+          <div class="title">Max Behr</div>
+      
+          <!-- Right: Contact Button -->
+          <div class="menu-right">
+            <a href="mailto:maxbehrbusiness@gmail.com" class="contact-button">Contact</a>
+          </div>
+        </div>
+      </nav>
+      
+
+
+    <section>
+        <div class="content">
+            <div class="section dark-section">
+             <h2>Discover my Work...</h2>
+
+            </div>
+    </section>
+
+    <div class="video-container">
+        <video class="bgVideo" preload="auto" autoplay loop muted>
+          <source src="video/WebVideo.mp4" type="video/mp4" />
+          Your browser does not support the video tag.
+        </video>
+        <div class="overlay-text"><a class="videoprojlink" href="placeholder.com"><h1>Video Projects</h1></a></div>
+      </div>
+      
+
+
         <section>
             <div class="content">
                 <div class="section dark-section">
@@ -189,8 +359,8 @@
                     <footer>
                         <div class="footer">
                             <div class="socials">
-                                <div><a href="https://www.linkedin.com/in/max-behr-267695304/"><img src="assets/used/LinkedInLogo.png"></a></div>
-                                <div><a href="https://www.instagram.com/maxbehrfoto/"><img src="assets/used/InstagramLogo.svg"></a></div>
+                                <div><a target="_blank" href="https://www.linkedin.com/in/max-behr-267695304/"><img src="assets/used/LinkedInLogo.png"></a></div>
+                                <div><a target="_blank" href="https://www.instagram.com/maxbehrfoto/"><img src="assets/used/InstagramLogo.svg"></a></div>
                             </div>        
                             <div class= "legal">&copy; Max Behr</div>
                         </div>
