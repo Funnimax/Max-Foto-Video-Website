@@ -81,21 +81,25 @@ const lightboxImg = document.getElementById('lightboxImg');
 
 gallery.forEach(img => {
     img.addEventListener('click', () => {
-        const highResSrc = img.getAttribute('data-src'); // Get high-resolution image source
-        
-        // Hide lightbox image until the new one is loaded
+        const highResSrc = img.getAttribute('data-src');
+        console.log("Attempting to load:", highResSrc); // Debugging output
+
         lightboxImg.style.opacity = "0";
 
-        // Preload the high-resolution image
         const tempImg = new Image();
         tempImg.src = highResSrc;
         tempImg.onload = () => {
-            lightboxImg.src = highResSrc; // Set new image
-            lightbox.classList.add('active'); // Show lightbox
-            lightboxImg.style.opacity = "1"; // Fade it in smoothly
+            console.log("Loaded successfully:", highResSrc);
+            lightboxImg.src = highResSrc;
+            lightbox.classList.add('active');
+            lightboxImg.style.opacity = "1";
+        };
+        tempImg.onerror = () => {
+            console.log("Failed to load:", highResSrc);
         };
     });
 });
+
 
 function closeLightbox() {
     lightbox.classList.remove('active');
