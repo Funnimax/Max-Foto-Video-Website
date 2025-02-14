@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Willkommen auf der Portfolio-Seite von Max Behr – professioneller Foto- und Videograf. Hier präsentiere ich meine Arbeiten und fange einzigartige Momente in beeindruckenden Bildern und Videos ein.">
+    <meta property="og:url" content="www.maxbehr.com">
+    <link rel="icon" type="image/png" href="assets/favicon/faviconsquare.png">
+    <meta property="og:description" content="Professioneller Foto- und Videograf. Tauche ein in meine Welt der visuellen Kunst und entdecke meine Arbeiten.">
+    <title>Max Behr Portfolio</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <nav>
+        <div class="navbar">
+          <div class="menu-left">
+            <div class="hamburger-container">
+              <span class="hamburger-icon">&#9776;</span>
+              <div class="dropdown-menu">
+                <a href="index.html">Home</a>
+                <a href="photography.html">Photography</a>
+                <a href="videography.html">Videography</a>
+              </div>
+            </div>
+          </div>
+          <div class="title"><a href="index.html">Max Behr</a></div>
+          <div class="menu-right">
+            <a href="mailto:maxbehrbusiness@gmail.com" class="contact-button">Contact</a>
+          </div>
+        </div>
+    </nav>
+
+
+
+    <section>
+        <h1><br>Photo Gallery<br><br><br></h1>
+        <div class="gallery">
+            <img src="pictures/thumbnails/img1-1.jpeg" data-src="pictures/img1-1.jpeg" alt="Image 1" loading="lazy">
+            <img src="pictures/thumbnails/img1-2.jpeg" data-src="pictures/img1-2.jpeg" alt="Image 2" loading="lazy">
+            <img src="pictures/thumbnails/img1-3.jpeg" data-src="pictures/img1-3.jpeg" alt="Image 3" loading="lazy">
+            <img src="pictures/thumbnails/img1-3.jpeg" data-src="pictures/img1-3.jpeg" alt="Image 4" loading="lazy">
+        </div>
+    </section> 
+    
+    <section>
+        <h1><br><br><br></h1>
+        <div class="gallery">
+            <img src="pictures/thumbnails/img2-1.jpeg" data-src="pictures/img2-1.jpeg" alt="Image 1" loading="lazy">
+            <img src="pictures/thumbnails/img2-2.jpeg" data-src="pictures/img2-2.jpeg" alt="Image 2" loading="lazy">
+            <img src="pictures/thumbnails/img2-3.jpeg" data-src="pictures/img2-3.jpeg" alt="Image 3" loading="lazy">
+        </div>
+    </section>
+    
+    <section>
+        <h1><br><br><br></h1>
+        <div class="gallery">
+            <img src="pictures/thumbnails/img3-1.jpeg" data-src="pictures/img3-1.jpeg" alt="Image 1" loading="lazy">
+            <img src="pictures/thumbnails/img3-2.jpeg" data-src="pictures/img3-2.jpeg" alt="Image 2" loading="lazy">
+            <img src="pictures/thumbnails/img3-3.jpeg" data-src="pictures/img3-3.jpeg" alt="Image 3" loading="lazy">
+        </div>
+    </section>
+    
+    <section>
+        <h1><br><br><br></h1>
+        <div class="gallery">
+            <img src="pictures/thumbnails/img4-1.jpeg" data-src="pictures/img4-1.jpeg" alt="Image 1" loading="lazy">
+            <img src="pictures/thumbnails/img4-2.jpeg" data-src="pictures/img4-2.jpeg" alt="Image 2" loading="lazy">
+            <img src="pictures/thumbnails/img4-3.jpeg" data-src="pictures/img4-3.jpeg" alt="Image 3" loading="lazy">
+        </div>
+    </section>
+    
+
+
+    <div class="lightbox" id="lightbox">
+        <span class="close" onclick="closeLightbox()">&times;</span>
+        <img id="lightboxImg" src="" alt="">
+    </div>
+    <script>
+const gallery = document.querySelectorAll('.gallery img');
+const lightbox = document.getElementById('lightbox');
+const lightboxImg = document.getElementById('lightboxImg');
+
+gallery.forEach(img => {
+    img.addEventListener('click', () => {
+        const highResSrc = img.getAttribute('data-src'); // Get high-resolution image source
+        
+        // Hide lightbox image until the new one is loaded
+        lightboxImg.style.opacity = "0";
+
+        // Preload the high-resolution image
+        const tempImg = new Image();
+        tempImg.src = highResSrc;
+        tempImg.onload = () => {
+            lightboxImg.src = highResSrc; // Set new image
+            lightbox.classList.add('active'); // Show lightbox
+            lightboxImg.style.opacity = "1"; // Fade it in smoothly
+        };
+    });
+});
+
+function closeLightbox() {
+    lightbox.classList.remove('active');
+}
+
+// Close lightbox when clicking outside the image
+lightbox.addEventListener('click', (event) => {
+    if (event.target !== lightboxImg) {
+        closeLightbox();
+    }
+});
+
+
+
+
+
+
+
+
+
+
+
+    </script>
+
+
+
+
+
+
+
+
+<footer>
+    <div class="footer">
+        <div class="socials">
+            <div><a target="_blank" href="https://www.linkedin.com/in/max-behr-267695304/"><img src="assets/used/LinkedInLogo.png"></a></div>
+            <div><a target="_blank" href="https://www.instagram.com/maxbehrfoto/"><img src="assets/used/InstagramLogo.svg"></a></div>
+        </div>        
+        <div class="legal"><a class="impressumlink" href="impressum.html">Impressum </a> <br> &copy; Max Behr</div>
+    </div>
+</footer>   
+</body>
+</html>
