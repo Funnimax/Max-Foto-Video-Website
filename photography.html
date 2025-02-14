@@ -100,13 +100,12 @@ gallery.forEach(img => {
 function closeLightbox() {
     lightbox.classList.remove('active');
 }
-
-
-
-
-
-
-
+// Close lightbox when clicking outside the image
+lightbox.addEventListener('click', (event) => {
+    if (event.target !== lightboxImg) {
+        closeLightbox();
+    }
+});
 
 
 
