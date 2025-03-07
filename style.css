@@ -59,6 +59,7 @@ h3{
 .videoprojlink {
     color: white;
     text-decoration: none;
+    font-family: "Bebas Neue";
     padding: 10px;
     transition: color 0.3s ease, letter-spacing 0.3s ease;
     letter-spacing: 0px;            
