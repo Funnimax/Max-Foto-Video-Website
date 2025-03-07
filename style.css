@@ -471,6 +471,10 @@ blockquote.instagram-media {
         font-size: 30px;
     }
 
+    .placeholderdiv {
+        height: 200px;
+    }
+
     .projects {
 
         gap: 0px;
