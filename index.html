@@ -30,42 +30,7 @@
         </div>
     </nav>
 
-
-    <div id="loading-container">
-        <div id="loading-bar"></div>
-    </div>
-
-
-    <script>
-        const video = document.getElementById('video');
-        const loadingBar = document.getElementById('loading-bar');
-
-        // Update loading bar based on video buffering
-        video.addEventListener('progress', () => {
-            if (video.buffered.length > 0) {
-                const loaded = video.buffered.end(0) / video.duration * 100;
-                loadingBar.style.width = loaded + "%";
-            }
-        });
-
-        // Show the loading bar while waiting
-        video.addEventListener('waiting', () => {
-            loadingBar.style.width = "0%";
-        });
-
-        // Hide loading bar when video can play
-        video.addEventListener('canplaythrough', () => {
-            loadingBar.style.width = "100%";
-            setTimeout(() => {
-                loadingBar.parentElement.style.display = "none";
-            }, 500);
-        });
-    </script>
     
-
-
-
-
 
 
 
@@ -138,7 +103,7 @@
 
     <div class="video-container">
     
-        <video id="video" width="100%" autoplay loop muted>
+        <video id="video" width="100%" autoplay loop muted playsinline>
             <source src="assets/videos/WebVideo.mp4" type="video/mp4">
             Your browser does not support the video tag.
         </video>
@@ -148,6 +113,11 @@
 
 
     <section>
+
+
+
+
+
         <div class="content">
             <div class="section dark-section">
             <br>
@@ -161,7 +131,7 @@
 
     <div class="video-container">
     
-        <video width="100%" autoplay loop muted>
+        <video width="100%" autoplay loop muted playinline>
             <source src="assets/videos/Gallerie.mp4" type="video/mp4">
             Your browser does not support the video tag.
         </video>
@@ -177,7 +147,7 @@
                 <div><a target="_blank" href="https://www.linkedin.com/in/max-behr-267695304/"><img src="assets/used/LinkedInLogo.png"alt="LinkedIn Profile"></a></div>
                 <div><a target="_blank" href="https://www.instagram.com/maxbehrfoto/"><img src="assets/used/InstagramLogo.svg" alt="Instagram Profile"></a></div>
             </div>
-            <div class="legal"><a class="impressumlink" href="impressum.html">Impressum </a> <br> &copy; Max Behr</div>
+            <div class="legal"><a class="impressumlink" href="impressum.html">Impressum Datenschutzerklärung</a> <br> &copy; Max Behr</div>
         </div>
     </footer>
 

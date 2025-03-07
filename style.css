@@ -72,11 +72,11 @@ h2 {
     filter:blur(2px);
 }
 
-.video-container:hover .bgVideoNonClickable {
+.video-container:hover .bgVideoExpandingMobile {
     filter: brightness(80%);
 }
 
-.bgVideoNonClickable {
+.bgVideoExpandingMobile {
     width: 80%;
     transition: filter 0.3s ease;
     margin: auto;
@@ -86,7 +86,7 @@ h2 {
 
 
 @media screen and (max-width: 800px) {
-    .bgVideoNonClickable {
+    .bgVideoExpandingMobile {
         width: 100%;
     }
     
@@ -232,28 +232,6 @@ h2 {
     opacity: 1;
     visibility: visible;
 }
-
-/* loading bar */
-
-#loading-container {
-    width: 100%;
-    height: 5px;
-    background-color: #000000;
-    position: absolute;
-    top: 0;
-    left: 0;
-    z-index: 900;
-}
-
-#loading-bar {
-    height: 100%;
-    width: 0%;
-    background-color: #8d8d8d;
-    transition: width 1s;
-    z-index: 950;
-}
-
-
 
 
 
