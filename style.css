@@ -238,17 +238,19 @@ h2 {
 #loading-container {
     width: 100%;
     height: 5px;
-    background-color: #ddd;
+    background-color: #000000;
     position: absolute;
     top: 0;
     left: 0;
+    z-index: 900;
 }
 
 #loading-bar {
     height: 100%;
     width: 0%;
-    background-color: #4CAF50;
-    transition: width 0.2s;
+    background-color: #8d8d8d;
+    transition: width 1s;
+    z-index: 950;
 }
 
 
