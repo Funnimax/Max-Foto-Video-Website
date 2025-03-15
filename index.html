@@ -11,6 +11,14 @@
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
+
+    <script>
+  if (window.location.pathname.endsWith("/index.html")) {
+    window.history.replaceState(null, "", "/home");
+  }
+</script>
+
+    
     <nav>
         <div class="navbar">
           <div class="menu-left">
