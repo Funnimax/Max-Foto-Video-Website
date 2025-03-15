@@ -17,6 +17,13 @@
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
+    
+<script>
+  if (window.location.pathname.endsWith("photography.html")) {
+    window.history.replaceState(null, "", window.location.pathname.replace("photography.html", "photography"));
+  }
+</script>
+    
     <nav>
         <div class="navbar">
           <div class="menu-left">
