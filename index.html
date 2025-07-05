@@ -85,23 +85,6 @@
 
 
 
-    <div id="cookie-banner" style="position: fixed; z-index: 1001; bottom: 10px; left: 50%; transform: translateX(-50%); width: 90%; max-width: 400px; background: rgba(0, 0, 0, 0.8); color: white; text-align: center; padding: 15px; border-radius: 8px; font-size: 14px; display: flex; flex-direction: column; align-items: center; gap: 10px;">
-        <p style="margin: 0;">This website uses cookies to ensure you get the best experience.</p>
-        <button onclick="acceptCookies()" style="background: #ffba53; border: none; color: white; padding: 8px 15px; cursor: pointer; border-radius: 5px; font-size: 14px;">Got it!</button>
-    </div>
-
-    <script>
-        function acceptCookies() {
-            document.getElementById('cookie-banner').style.display = 'none';
-            localStorage.setItem('cookiesAccepted', 'true');
-        }
-
-        window.onload = function() {
-            if (localStorage.getItem('cookiesAccepted')) {
-                document.getElementById('cookie-banner').style.display = 'none';
-            }
-        }
-    </script>
 
 
 
