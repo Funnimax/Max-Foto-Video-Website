@@ -1,174 +1,441 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Max Behr – Professional Photographer & Videographer">
-    <meta property="og:url" content="https://www.maxbehr.com">
-    <meta property="og:type" content="website">
-    <meta property="og:title" content="Max Behr | Photographer & Videographer">
-    <meta property="og:description" content="Professioneller Foto- und Videograf. Entdecke meine Filme und Fotografien.">
-    <meta property="og:image" content="https://www.maxbehr.com/assets/favicon/faviconsquare.png">
-    <meta property="og:image:type" content="image/png">
-    <meta property="og:image:width" content="800">
-    <meta property="og:image:height" content="800">
-    <link rel="icon" type="image/png" href="assets/favicon/faviconsquare.png">
-    <title>Max Behr | Photographer & Videographer</title>
-    <link rel="stylesheet" href="style.css">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Max Behr — Automotive, Watch &amp; Travel Filmmaker</title>
+<meta name="description" content="Films and stills for automotive, watch and travel brands. Based in Germany, shooting across Europe.">
+<link rel="canonical" href="https://maxbehr.com/">
+<meta property="og:title" content="Max Behr — Automotive, Watch &amp; Travel Filmmaker">
+<meta property="og:description" content="Films and stills for automotive, watch and travel brands.">
+<meta property="og:image" content="https://maxbehr.com/pictures/img10-3.jpeg">
+<meta property="og:type" content="website">
+<meta name="theme-color" content="#0a0a0b">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Inter+Tight:wght@300;400;500&display=swap" rel="stylesheet">
+
+<style>
+/* ========== BASIS ========== */
+*{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --bg:#0a0a0b;          /* Hintergrund */
+  --fg:#f4f2ef;          /* Schrift */
+  --mut:#8f8b86;         /* graue Nebenschrift */
+  --line:rgba(255,255,255,.13);
+  --sand:#d9c7af;        /* Akzentfarbe */
+  --max:1360px;
+}
+html{scroll-behavior:smooth}
+body{background:var(--bg);color:var(--fg);font-family:'Inter Tight',system-ui,-apple-system,sans-serif;
+     font-weight:300;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+img,video{display:block;max-width:100%}
+a{color:inherit;text-decoration:none}
+.wrap{max-width:var(--max);margin:0 auto;padding:0 clamp(18px,4vw,56px)}
+.eyebrow{font-size:11px;letter-spacing:.22em;text-transform:uppercase;color:var(--mut)}
+.serif{font-family:'Instrument Serif',Georgia,serif;font-weight:400}
+.sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0)}
+
+/* ========== HEADER ========== */
+header{position:fixed;top:0;left:0;right:0;z-index:60;transition:.4s;border-bottom:1px solid transparent}
+header.scrolled{background:rgba(10,10,11,.82);backdrop-filter:blur(14px);border-color:var(--line)}
+.hd{display:flex;align-items:center;justify-content:space-between;height:74px}
+.mark{font-size:13px;letter-spacing:.34em;font-weight:500}
+nav{display:flex;gap:32px}
+nav a{font-size:13px;color:#cfcbc6;position:relative;padding:4px 0}
+nav a::after{content:"";position:absolute;left:0;bottom:0;height:1px;width:0;background:var(--sand);transition:.35s}
+nav a:hover::after,nav a:focus-visible::after{width:100%}
+.btn{display:inline-block;border:1px solid var(--line);padding:10px 20px;border-radius:999px;
+     font-size:11px;letter-spacing:.14em;text-transform:uppercase;transition:.3s;cursor:pointer;
+     background:none;color:inherit;font-family:inherit}
+.btn:hover{background:var(--fg);color:#0a0a0b;border-color:var(--fg)}
+#burger{display:none;background:none;border:0;color:var(--fg);font-size:20px;cursor:pointer;padding:8px}
+
+/* ========== HERO ========== */
+.hero{position:relative;height:100svh;min-height:600px;overflow:hidden;display:flex;align-items:flex-end}
+.hero>video,.hero>img.fallback{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.hero::after{content:"";position:absolute;inset:0;pointer-events:none;
+  background:linear-gradient(180deg,rgba(10,10,11,.6) 0%,rgba(10,10,11,.12) 30%,
+             rgba(10,10,11,.45) 58%,rgba(10,10,11,.9) 88%,rgba(10,10,11,.99) 100%)}
+.hero .wrap{position:relative;z-index:2;width:100%;padding-bottom:clamp(36px,7vh,80px)}
+.hero .eyebrow{color:#e6e2dd;text-shadow:0 2px 18px rgba(0,0,0,.8)}
+h1{font-family:'Instrument Serif',Georgia,serif;font-weight:400;font-size:clamp(42px,8.2vw,124px);
+   line-height:.94;letter-spacing:-.02em;margin-top:18px;text-shadow:0 4px 40px rgba(0,0,0,.45)}
+h1 em{font-style:italic;color:var(--sand)}
+.sub{max-width:46ch;color:#d3cfca;font-size:clamp(14px,1.25vw,17px);line-height:1.68}
+.herorow{display:flex;justify-content:space-between;align-items:flex-end;gap:28px;flex-wrap:wrap;margin-top:34px}
+
+/* ========== LAUFBAND ========== */
+.mq{border-top:1px solid var(--line);border-bottom:1px solid var(--line);overflow:hidden;padding:14px 0;white-space:nowrap}
+.mq div{display:inline-block;animation:mq 38s linear infinite;will-change:transform}
+.mq span{font-family:'Instrument Serif',Georgia,serif;font-size:clamp(19px,2.6vw,36px);padding:0 24px;color:#d9d5d0;opacity:.7}
+.mq i{color:var(--sand);font-style:normal}
+@keyframes mq{to{transform:translateX(-50%)}}
+
+/* ========== SEKTIONEN ========== */
+section{padding:clamp(64px,10vh,132px) 0}
+.shead{display:flex;justify-content:space-between;align-items:baseline;border-top:1px solid var(--line);
+       padding-top:18px;margin-bottom:44px;gap:24px;flex-wrap:wrap}
+.shead h2{font-family:'Instrument Serif',Georgia,serif;font-weight:400;font-size:clamp(28px,4.4vw,58px);
+          line-height:1;letter-spacing:-.01em;flex:1}
+
+/* ========== FILME ========== */
+.films{display:grid;grid-template-columns:repeat(12,1fr);gap:clamp(10px,1.5vw,20px)}
+.film{position:relative;overflow:hidden;cursor:pointer;background:#141416;aspect-ratio:16/9;border:0;padding:0;
+      text-align:left;color:inherit;font:inherit;width:100%}
+.film video,.film img{width:100%;height:100%;object-fit:cover;transition:transform 1.2s cubic-bezier(.16,1,.3,1)}
+.film:hover video,.film:hover img{transform:scale(1.045)}
+.film .meta{position:absolute;left:0;right:0;bottom:0;padding:20px;
+  background:linear-gradient(transparent,rgba(6,6,7,.88));display:flex;justify-content:space-between;align-items:flex-end;gap:12px}
+.film h3{font-size:clamp(16px,1.6vw,23px);font-weight:400;letter-spacing:-.01em;margin-top:5px}
+.tag{font-size:10px;letter-spacing:.2em;text-transform:uppercase;color:var(--sand)}
+.play{width:42px;height:42px;border-radius:50%;border:1px solid rgba(255,255,255,.5);
+      display:grid;place-items:center;flex:0 0 auto;font-size:11px;transition:.3s}
+.film:hover .play{background:var(--fg);color:#000;border-color:var(--fg)}
+.wide{grid-column:span 7}.half{grid-column:span 5}.third{grid-column:span 4}
+
+/* ========== FOTOS ========== */
+.filters{display:flex;gap:9px;flex-wrap:wrap;margin-bottom:28px}
+.filters button{background:none;border:1px solid var(--line);color:#bdb9b4;padding:9px 18px;border-radius:999px;
+  font:inherit;font-size:11px;letter-spacing:.12em;text-transform:uppercase;cursor:pointer;transition:.3s}
+.filters button.on{background:var(--fg);color:#0a0a0b;border-color:var(--fg)}
+.grid{columns:3;column-gap:clamp(10px,1.4vw,18px)}
+.cell{break-inside:avoid;margin-bottom:clamp(10px,1.4vw,18px);position:relative;overflow:hidden;
+      cursor:zoom-in;background:#141416;display:block;border:0;padding:0;width:100%}
+.cell img{width:100%;transition:transform 1.2s cubic-bezier(.16,1,.3,1)}
+.cell:hover img{transform:scale(1.05)}
+.cell figcaption{position:absolute;left:0;bottom:0;width:100%;padding:16px;font-size:10px;letter-spacing:.2em;
+  text-transform:uppercase;opacity:0;transform:translateY(8px);transition:.45s;
+  background:linear-gradient(transparent,rgba(6,6,7,.82))}
+.cell:hover figcaption{opacity:1;transform:none}
+
+/* ========== ÜBER MICH ========== */
+.about{display:grid;grid-template-columns:1.05fr 1fr;gap:clamp(24px,5vw,76px);align-items:center}
+.about h2{font-family:'Instrument Serif',Georgia,serif;font-weight:400;
+          font-size:clamp(28px,4.2vw,54px);line-height:1.05;margin-top:14px}
+.about p{color:#b9b5b0;line-height:1.8;font-size:clamp(14px,1.2vw,16px);margin-top:18px;max-width:52ch}
+.stats{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;margin-top:38px;border-top:1px solid var(--line);padding-top:24px}
+.stats b{font-family:'Instrument Serif',Georgia,serif;font-weight:400;font-size:clamp(26px,3.2vw,42px);display:block;margin-bottom:4px}
+.about figure img{width:100%;aspect-ratio:4/5;object-fit:cover}
+
+/* ========== LEISTUNGEN ========== */
+.svc{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--line);border:1px solid var(--line)}
+.svc>article{background:var(--bg);padding:clamp(22px,3vw,38px);min-height:250px;
+  display:flex;flex-direction:column;justify-content:space-between;transition:.4s}
+.svc>article:hover{background:#121214}
+.svc h3{font-family:'Instrument Serif',Georgia,serif;font-weight:400;font-size:clamp(21px,2.2vw,30px);margin:14px 0 12px}
+.svc p{color:#a5a19c;font-size:13.5px;line-height:1.7}
+
+/* ========== KONTAKT / FOOTER ========== */
+.cta{text-align:center;padding:clamp(74px,13vh,160px) 0;border-top:1px solid var(--line)}
+.mail{font-family:'Instrument Serif',Georgia,serif;font-size:clamp(22px,6vw,80px);letter-spacing:-.02em;
+  display:inline-block;line-height:1.1;border-bottom:1px solid rgba(255,255,255,.25);transition:.4s;margin:26px 0 34px;
+  word-break:break-word}
+.mail:hover{color:var(--sand);border-color:var(--sand)}
+footer{border-top:1px solid var(--line);padding:24px 0}
+footer .wrap{display:flex;justify-content:space-between;font-size:12px;color:var(--mut);gap:16px;flex-wrap:wrap}
+
+/* ========== LIGHTBOX ========== */
+.lb{position:fixed;inset:0;z-index:100;background:rgba(6,6,7,.97);display:none;place-items:center;padding:3vw}
+.lb.on{display:grid}
+.lb img,.lb video{max-width:92vw;max-height:86vh;object-fit:contain;margin:0 auto}
+.lb button{position:absolute;background:none;border:0;color:#fff;cursor:pointer;font-size:28px;padding:18px;opacity:.7;line-height:1}
+.lb button:hover{opacity:1}
+.lb .x{top:10px;right:14px}
+.lb .pv{left:2px;top:50%;transform:translateY(-50%)}
+.lb .nx{right:2px;top:50%;transform:translateY(-50%)}
+.lb .count{position:absolute;bottom:16px;left:0;right:0;text-align:center;font-size:11px;letter-spacing:.2em;color:#8f8b86}
+
+/* ========== SCROLL-ANIMATION ========== */
+.r{opacity:0;transform:translateY(24px);transition:1s cubic-bezier(.16,1,.3,1)}
+.r.in{opacity:1;transform:none}
+
+/* ========== MOBIL ========== */
+@media(max-width:880px){
+  #burger{display:block}
+  nav{position:fixed;inset:74px 0 auto 0;background:rgba(10,10,11,.97);backdrop-filter:blur(14px);
+      flex-direction:column;gap:0;padding:10px 0 22px;border-bottom:1px solid var(--line);display:none}
+  nav.open{display:flex}
+  nav a{padding:14px clamp(18px,4vw,56px);font-size:15px}
+  header .btn{display:none}
+  .films>*{grid-column:span 12}
+  .about{grid-template-columns:1fr}
+  .svc{grid-template-columns:1fr}
+  .grid{columns:2}
+}
+@media(max-width:540px){.grid{columns:1}}
+@media(prefers-reduced-motion:reduce){
+  html{scroll-behavior:auto}
+  .r{opacity:1;transform:none;transition:none}
+  .mq div{animation:none}
+}
+</style>
 </head>
 
 <body>
 
-<script>
-  if (window.location.pathname.endsWith("index.html")) {
-    window.history.replaceState(null, "", window.location.pathname.replace("index.html", ""));
-  }
-</script>
-
-
-    
-    <nav>
-        <div class="navbar">
-          <div class="menu-left">
-            <div class="hamburger-container">
-              <span class="hamburger-icon">&#9776;</span>
-              <div class="dropdown-menu">
-                <a href="index.html">Home</a>
-                <a href="photography.html">Photography</a>
-                <a href="videography.html">Videography</a>
-              </div>
-            </div>
-          </div>
-          <div class="title"><a href="index.html"><h1>Max Behr</h1></a></div>
-          <div class="menu-right">
-            <a href="mailto:maxbehrbusiness@gmail.com" class="contact-button">Contact</a>
-          </div>
-        </div>
+<header id="hdr">
+  <div class="wrap hd">
+    <a href="#top" class="mark" id="wordmark">MAX BEHR</a>
+    <nav id="nav">
+      <a href="#films">Films</a>
+      <a href="#stills">Stills</a>
+      <a href="#about">About</a>
+      <a href="#services">Services</a>
+      <a href="#contact">Contact</a>
     </nav>
+    <a class="btn" href="#contact">Start a project</a>
+    <button id="burger" aria-label="Menu" aria-expanded="false">&#9776;</button>
+  </div>
+</header>
 
-    
-
-
-
-
-
-
-    <style>
-        #cookie-banner {
-            position: fixed;
-            bottom: 0;
-            left: 0;
-            width: 100%;
-            background: #333;
-            color: white;
-            text-align: center;
-            padding: 10px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-        #cookie-banner button {
-            background: #ff9800;
-            border: none;
-            color: white;
-            padding: 5px 10px;
-            cursor: pointer;
-        }
-    </style>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-    <section>
-        <div class="content">
-            <div class="section dark-section">
-             <h2>Discover my Work...</h2>
-            </div>
-    </section>
-
-    <div class="video-container">
-    
-        <video id="video" width="100%" autoplay loop muted playsinline poster="pictures/videothumbnails/Webvideo.jpg" onloadeddata="this.play()">
-            <source src="assets/videos/WebVideo.mp4" type="video/mp4">
-            Your browser does not support the video tag.
-        </video>
-
-        <div class="overlay-text"><a class="videoprojlink" href="videography.html"><h3>Video Projects</h3></a></div>
+<div class="hero" id="top">
+  <video id="heroVid" autoplay muted loop playsinline preload="auto"></video>
+  <div class="wrap">
+    <p class="eyebrow" id="heroRole"></p>
+    <h1 id="heroHeadline"></h1>
+    <div class="herorow">
+      <p class="sub" id="heroIntro"></p>
+      <div style="display:flex;gap:12px;flex-wrap:wrap">
+        <a class="btn" href="#films">View the work</a>
+        <a class="btn" href="#contact">Get in touch</a>
+      </div>
     </div>
+  </div>
+</div>
 
+<div class="mq" aria-hidden="true"><div id="marquee"></div></div>
 
-    <section>
-
-
-
-
-
-        <div class="content">
-            <div class="section dark-section">
-            <br>
-            <br>
-            <br>
-            <br>
-            <br>
-            </div>
-    </section>
-
-
-    <div class="video-container">
-    
-        <video id="video" width="100%" autoplay loop muted playsinline poster="pictures/videothumbnails/Gallerie.jpg" onloadeddata="this.play()">
-            <source src="assets/videos/Gallerie.mp4" type="video/mp4">
-            Your browser does not support the video tag.
-        </video>
-
-        <div class="overlay-text"><a class="videoprojlink" href="photography.html"><h3>Photo Gallery</h3></a></div>
+<section id="films">
+  <div class="wrap">
+    <div class="shead r">
+      <span class="eyebrow">01 — Motion</span>
+      <h2>Selected films</h2>
+      <span class="eyebrow">Hover to preview · click for sound</span>
     </div>
+    <div class="films" id="filmGrid"></div>
+  </div>
+</section>
 
+<section id="stills">
+  <div class="wrap">
+    <div class="shead r">
+      <span class="eyebrow">02 — Stills</span>
+      <h2>Photography</h2>
+      <span class="eyebrow">Filter by subject</span>
+    </div>
+    <div class="filters" id="filters"></div>
+    <div class="grid" id="grid"></div>
+  </div>
+</section>
 
+<section id="about">
+  <div class="wrap about">
+    <div class="r">
+      <span class="eyebrow">03 — About</span>
+      <h2 id="aboutTitle"></h2>
+      <div id="aboutText"></div>
+      <div class="stats" id="stats"></div>
+    </div>
+    <figure class="r"><img id="aboutImg" alt="" loading="lazy"></figure>
+  </div>
+</section>
 
-    <footer>
-        <div class="footer">
-            <div class="socials">
-                <div><a target="_blank" href="https://www.linkedin.com/in/max-behr-267695304/"><img src="assets/used/LinkedInLogo.png"alt="LinkedIn Profile"></a></div>
-                <div><a target="_blank" href="https://www.instagram.com/maxbehrfoto/"><img src="assets/used/InstagramLogo.svg" alt="Instagram Profile"></a></div>
-            </div>
-            <div class="legal"><a class="impressumlink" href="impressum.html">Impressum Datenschutzerklärung</a> <br> &copy; Max Behr</div>
-        </div>
-    </footer>
+<section id="services">
+  <div class="wrap">
+    <div class="shead r">
+      <span class="eyebrow">04 — Services</span>
+      <h2>How we can work together</h2>
+    </div>
+    <div class="svc r" id="svc"></div>
+  </div>
+</section>
 
+<div class="cta" id="contact">
+  <div class="wrap">
+    <span class="eyebrow">Tell me what you are making</span><br>
+    <a class="mail" id="mail" href="#"></a>
+    <div style="display:flex;gap:12px;justify-content:center;flex-wrap:wrap">
+      <a class="btn" id="ig" href="#" rel="me noopener">Instagram</a>
+      <a class="btn" id="li" href="#" rel="me noopener">LinkedIn</a>
+    </div>
+  </div>
+</div>
 
-        <script>
+<footer>
+  <div class="wrap">
+    <span>&copy; <span id="year"></span> <span id="footName"></span></span>
+    <span><a href="impressum.html">Impressum</a> · <a href="impressum.html">Datenschutz</a></span>
+  </div>
+</footer>
 
-            document.addEventListener("DOMContentLoaded", function () {
-                const hamburgerIcon = document.querySelector(".hamburger-icon");
-                const dropdownMenu = document.querySelector(".dropdown-menu");
-            
-                hamburgerIcon.addEventListener("click", function () {
-                    dropdownMenu.classList.toggle("show-menu");
-                });
-            
-                // Close menu if clicking outside
-                document.addEventListener("click", function (event) {
-                    if (!hamburgerIcon.contains(event.target) && !dropdownMenu.contains(event.target)) {
-                        dropdownMenu.classList.remove("show-menu");
-                    }
-                });
-            });
-        
-        </script>
+<div class="lb" id="lb" role="dialog" aria-modal="true" aria-label="Media viewer">
+  <button class="x"  aria-label="Close">&#10005;</button>
+  <button class="pv" aria-label="Previous">&#8249;</button>
+  <button class="nx" aria-label="Next">&#8250;</button>
+  <div id="lbBody"></div>
+  <div class="count" id="lbCount"></div>
+</div>
+
+<script src="data.js"></script>
+<script>
+(function () {
+  var $ = function (s) { return document.querySelector(s); };
+  var esc = function (s) { return String(s).replace(/[&<>"]/g, function (c) {
+    return { '&':'&amp;', '<':'&lt;', '>':'&gt;', '"':'&quot;' }[c];
+  }); };
+
+  /* ---------- Kopf, Hero, Texte ---------- */
+  $('#wordmark').textContent = SITE.name.toUpperCase();
+  $('#footName').textContent = SITE.name;
+  $('#year').textContent = new Date().getFullYear();
+  $('#heroRole').textContent = SITE.role;
+  $('#heroHeadline').innerHTML = SITE.headline;
+  $('#heroIntro').textContent = SITE.intro;
+  $('#mail').textContent = SITE.email;
+  $('#mail').href = 'mailto:' + SITE.email;
+  $('#ig').href = SITE.instagram;
+  $('#li').href = SITE.linkedin;
+
+  var hv = $('#heroVid');
+  hv.poster = SITE.heroPoster;
+  hv.src = SITE.heroVideo;
+  hv.play().catch(function () {});          /* kein Video? Poster bleibt stehen. */
+  hv.addEventListener('error', function () { hv.removeAttribute('src'); });
+
+  /* ---------- Laufband ---------- */
+  var mqOnce = SITE.marquee.map(function (w) {
+    return '<span>' + esc(w) + '</span><span><i>&#10038;</i></span>';
+  }).join('');
+  $('#marquee').innerHTML = mqOnce + mqOnce;   /* doppelt = nahtlose Schleife */
+
+  /* ---------- Über mich ---------- */
+  $('#aboutTitle').textContent = SITE.aboutTitle;
+  $('#aboutText').innerHTML = SITE.aboutText.map(function (p) { return '<p>' + esc(p) + '</p>'; }).join('');
+  $('#aboutImg').src = SITE.aboutImage;
+  $('#stats').innerHTML = SITE.stats.map(function (s) {
+    return '<div><b>' + esc(s.big) + '</b><span class="eyebrow">' + esc(s.label) + '</span></div>';
+  }).join('');
+
+  /* ---------- Leistungen ---------- */
+  $('#svc').innerHTML = SITE.services.map(function (s, i) {
+    return '<article><span class="tag">' + ('0' + (i + 1)) + '</span><h3>' + esc(s.title) +
+           '</h3><p>' + esc(s.text) + '</p></article>';
+  }).join('');
+
+  /* ---------- Filme ---------- */
+  $('#filmGrid').innerHTML = SITE.films.map(function (f, i) {
+    return '<button class="film r ' + (f.size || 'third') + '" data-film="' + i + '">' +
+           '<video muted loop playsinline preload="none" poster="' + esc(f.poster) + '"></video>' +
+           '<span class="meta"><span><span class="tag">' + esc(f.tag) + '</span>' +
+           '<h3>' + esc(f.title) + '</h3></span><span class="play">&#9654;</span></span></button>';
+  }).join('');
+
+  [].forEach.call(document.querySelectorAll('.film'), function (card) {
+    var film = SITE.films[+card.dataset.film];
+    var v = card.querySelector('video');
+    card.addEventListener('mouseenter', function () {
+      if (!v.getAttribute('src')) v.setAttribute('src', film.video);   /* erst bei Hover laden */
+      v.play().catch(function () {});
+    });
+    card.addEventListener('mouseleave', function () { v.pause(); });
+    card.addEventListener('click', function () { openFilm(film); });
+  });
+
+  /* ---------- Fotos + Filter ---------- */
+  var photos = SITE.photos.slice();
+  $('#grid').innerHTML = photos.map(function (p, i) {
+    return '<figure class="cell r" data-cat="' + esc(p.cat) + '" data-i="' + i + '">' +
+           '<img loading="lazy" src="' + esc(p.thumb) + '" alt="' + esc(p.alt || p.cat) + '">' +
+           '<figcaption>' + esc(p.cat) + '</figcaption></figure>';
+  }).join('');
+
+  $('#filters').innerHTML = ['All'].concat(SITE.photoFilters).map(function (c, i) {
+    return '<button class="' + (i === 0 ? 'on' : '') + '" data-f="' + esc(c) + '">' + esc(c) + '</button>';
+  }).join('');
+
+  $('#filters').addEventListener('click', function (e) {
+    var b = e.target.closest('button'); if (!b) return;
+    [].forEach.call(this.children, function (x) { x.classList.remove('on'); });
+    b.classList.add('on');
+    var f = b.dataset.f;
+    [].forEach.call(document.querySelectorAll('.cell'), function (c) {
+      c.style.display = (f === 'All' || c.dataset.cat === f) ? '' : 'none';
+    });
+  });
+
+  $('#grid').addEventListener('click', function (e) {
+    var c = e.target.closest('.cell'); if (c) openPhoto(+c.dataset.i);
+  });
+
+  /* ---------- Lightbox ---------- */
+  var lb = $('#lb'), lbBody = $('#lbBody'), lbCount = $('#lbCount'), cur = -1;
+
+  function visible() {
+    return [].filter.call(document.querySelectorAll('.cell'), function (c) {
+      return c.style.display !== 'none';
+    }).map(function (c) { return +c.dataset.i; });
+  }
+  function openPhoto(i) {
+    cur = i;
+    var p = photos[i], list = visible();
+    lbBody.innerHTML = '<img src="' + esc(p.full || p.thumb) + '" alt="' + esc(p.alt || p.cat) + '">';
+    lbCount.textContent = (list.indexOf(i) + 1) + ' / ' + list.length + '  ·  ' + p.cat;
+    lb.classList.add('on'); document.body.style.overflow = 'hidden';
+  }
+  function openFilm(f) {
+    cur = -1;
+    lbBody.innerHTML = '<video src="' + esc(f.video) + '" controls autoplay playsinline></video>';
+    lbCount.textContent = f.title;
+    lb.classList.add('on'); document.body.style.overflow = 'hidden';
+  }
+  function closeLb() {
+    lb.classList.remove('on'); lbBody.innerHTML = ''; document.body.style.overflow = '';
+  }
+  function step(d) {
+    if (cur < 0) return;
+    var list = visible(), i = list.indexOf(cur);
+    if (i < 0) return;
+    openPhoto(list[(i + d + list.length) % list.length]);
+  }
+  lb.querySelector('.x').onclick  = closeLb;
+  lb.querySelector('.pv').onclick = function () { step(-1); };
+  lb.querySelector('.nx').onclick = function () { step(1); };
+  lb.addEventListener('click', function (e) { if (e.target === lb) closeLb(); });
+  document.addEventListener('keydown', function (e) {
+    if (!lb.classList.contains('on')) return;
+    if (e.key === 'Escape') closeLb();
+    if (e.key === 'ArrowRight') step(1);
+    if (e.key === 'ArrowLeft') step(-1);
+  });
+
+  /* ---------- Scroll-Animation + Header ---------- */
+  var io = new IntersectionObserver(function (entries) {
+    entries.forEach(function (x) {
+      if (x.isIntersecting) { x.target.classList.add('in'); io.unobserve(x.target); }
+    });
+  }, { threshold: .06, rootMargin: '0px 0px -40px 0px' });
+  [].forEach.call(document.querySelectorAll('.r'), function (el, i) {
+    el.style.transitionDelay = (Math.min(i, 6) * 40) + 'ms';
+    io.observe(el);
+  });
+
+  addEventListener('scroll', function () {
+    $('#hdr').classList.toggle('scrolled', scrollY > 60);
+  }, { passive: true });
+
+  /* ---------- Mobiles Menü ---------- */
+  var burger = $('#burger'), nav = $('#nav');
+  burger.onclick = function () {
+    var open = nav.classList.toggle('open');
+    burger.setAttribute('aria-expanded', open ? 'true' : 'false');
+    burger.innerHTML = open ? '&#10005;' : '&#9776;';
+  };
+  nav.addEventListener('click', function (e) {
+    if (e.target.tagName === 'A') { nav.classList.remove('open'); burger.innerHTML = '&#9776;'; }
+  });
+})();
+</script>
 </body>
 </html>
