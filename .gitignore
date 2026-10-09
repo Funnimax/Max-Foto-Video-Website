@@ -1,0 +1,13 @@
+# Kameraoriginale und unkomprimierte Exporte gehoeren nicht ins Repo.
+# Git behaelt jede Version fuer immer.
+_raw/
+*.mov
+*.MOV
+*.braw
+*.arw
+*.cr2
+*.dng
+
+# macOS
+.DS_Store
+._*

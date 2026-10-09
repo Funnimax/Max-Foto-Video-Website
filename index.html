@@ -6,9 +6,10 @@
 <title>Max Behr — Automotive, Watch &amp; Travel Filmmaker</title>
 <meta name="description" content="Films and stills for automotive, watch and travel brands. Based in Germany, shooting across Europe.">
 <link rel="canonical" href="https://maxbehr.com/">
+<link rel="icon" type="image/png" href="media/ui/favicon-square.png">
 <meta property="og:title" content="Max Behr — Automotive, Watch &amp; Travel Filmmaker">
 <meta property="og:description" content="Films and stills for automotive, watch and travel brands.">
-<meta property="og:image" content="https://maxbehr.com/pictures/img10-3.jpeg">
+<meta property="og:image" content="https://maxbehr.com/media/photos/full/img10-3.jpeg">
 <meta property="og:type" content="website">
 <meta name="theme-color" content="#0a0a0b">
 
@@ -282,6 +283,17 @@ footer .wrap{display:flex;justify-content:space-between;font-size:12px;color:var
 <script>
 (function () {
   var $ = function (s) { return document.querySelector(s); };
+
+  /* Wo welche Datei liegt — an EINER Stelle festgelegt.
+     data.js kennt nur noch Dateinamen, nicht die Ordner. */
+  var M = {
+    hero:      function (f) { return 'media/hero/' + f; },
+    film:      function (f) { return 'media/films/' + f + '.mp4'; },
+    preview:   function (f) { return 'media/films/' + f + '-preview.mp4'; },
+    filmPoster:function (f) { return 'media/films/' + f + '-poster.jpg'; },
+    thumb:     function (f) { return 'media/photos/thumbs/' + f; },
+    full:      function (f) { return 'media/photos/full/' + f; }
+  };
   var esc = function (s) { return String(s).replace(/[&<>"]/g, function (c) {
     return { '&':'&amp;', '<':'&lt;', '>':'&gt;', '"':'&quot;' }[c];
   }); };
@@ -299,8 +311,8 @@ footer .wrap{display:flex;justify-content:space-between;font-size:12px;color:var
   $('#li').href = SITE.linkedin;
 
   var hv = $('#heroVid');
-  hv.poster = SITE.heroPoster;
-  hv.src = SITE.heroVideo;
+  hv.poster = M.hero(SITE.heroPoster);
+  hv.src = M.hero(SITE.heroVideo);
   hv.play().catch(function () {});          /* kein Video? Poster bleibt stehen. */
   hv.addEventListener('error', function () { hv.removeAttribute('src'); });
 
@@ -313,7 +325,7 @@ footer .wrap{display:flex;justify-content:space-between;font-size:12px;color:var
   /* ---------- Über mich ---------- */
   $('#aboutTitle').textContent = SITE.aboutTitle;
   $('#aboutText').innerHTML = SITE.aboutText.map(function (p) { return '<p>' + esc(p) + '</p>'; }).join('');
-  $('#aboutImg').src = SITE.aboutImage;
+  $('#aboutImg').src = M.full(SITE.aboutImage);
   $('#stats').innerHTML = SITE.stats.map(function (s) {
     return '<div><b>' + esc(s.big) + '</b><span class="eyebrow">' + esc(s.label) + '</span></div>';
   }).join('');
@@ -327,7 +339,7 @@ footer .wrap{display:flex;justify-content:space-between;font-size:12px;color:var
   /* ---------- Filme ---------- */
   $('#filmGrid').innerHTML = SITE.films.map(function (f, i) {
     return '<button class="film r ' + (f.size || 'third') + '" data-film="' + i + '">' +
-           '<video muted loop playsinline preload="none" poster="' + esc(f.poster) + '"></video>' +
+           '<video muted loop playsinline preload="none" poster="' + esc(M.filmPoster(f.file)) + '"></video>' +
            '<span class="meta"><span><span class="tag">' + esc(f.tag) + '</span>' +
            '<h3>' + esc(f.title) + '</h3></span><span class="play">&#9654;</span></span></button>';
   }).join('');
@@ -336,7 +348,8 @@ footer .wrap{display:flex;justify-content:space-between;font-size:12px;color:var
     var film = SITE.films[+card.dataset.film];
     var v = card.querySelector('video');
     card.addEventListener('mouseenter', function () {
-      if (!v.getAttribute('src')) v.setAttribute('src', film.video);   /* erst bei Hover laden */
+      /* Hover laedt nur die kleine stumme Vorschau, nicht den ganzen Film. */
+      if (!v.getAttribute('src')) v.setAttribute('src', M.preview(film.file));
       v.play().catch(function () {});
     });
     card.addEventListener('mouseleave', function () { v.pause(); });
@@ -347,7 +360,7 @@ footer .wrap{display:flex;justify-content:space-between;font-size:12px;color:var
   var photos = SITE.photos.slice();
   $('#grid').innerHTML = photos.map(function (p, i) {
     return '<figure class="cell r" data-cat="' + esc(p.cat) + '" data-i="' + i + '">' +
-           '<img loading="lazy" src="' + esc(p.thumb) + '" alt="' + esc(p.alt || p.cat) + '">' +
+           '<img loading="lazy" src="' + esc(M.thumb(p.file)) + '" alt="' + esc(p.alt || p.cat) + '">' +
            '<figcaption>' + esc(p.cat) + '</figcaption></figure>';
   }).join('');
 
@@ -380,13 +393,13 @@ footer .wrap{display:flex;justify-content:space-between;font-size:12px;color:var
   function openPhoto(i) {
     cur = i;
     var p = photos[i], list = visible();
-    lbBody.innerHTML = '<img src="' + esc(p.full || p.thumb) + '" alt="' + esc(p.alt || p.cat) + '">';
+    lbBody.innerHTML = '<img src="' + esc(M.full(p.file)) + '" alt="' + esc(p.alt || p.cat) + '">';
     lbCount.textContent = (list.indexOf(i) + 1) + ' / ' + list.length + '  ·  ' + p.cat;
     lb.classList.add('on'); document.body.style.overflow = 'hidden';
   }
   function openFilm(f) {
     cur = -1;
-    lbBody.innerHTML = '<video src="' + esc(f.video) + '" controls autoplay playsinline></video>';
+    lbBody.innerHTML = '<video src="' + esc(M.film(f.file)) + '" controls autoplay playsinline></video>';
     lbCount.textContent = f.title;
     lb.classList.add('on'); document.body.style.overflow = 'hidden';
   }
