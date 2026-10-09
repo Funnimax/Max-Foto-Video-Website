@@ -213,7 +213,7 @@ footer .wrap{display:flex;justify-content:space-between;font-size:12px;color:var
     <div class="shead r">
       <span class="eyebrow">01 — Motion</span>
       <h2>Selected films</h2>
-      <span class="eyebrow">Hover to preview · click for sound</span>
+      <span class="eyebrow">Hover to preview · click for more</span>
     </div>
     <div class="films" id="filmGrid"></div>
   </div>
@@ -341,7 +341,8 @@ footer .wrap{display:flex;justify-content:space-between;font-size:12px;color:var
     return '<button class="film r ' + (f.size || 'third') + '" data-film="' + i + '">' +
            '<video muted loop playsinline preload="none" poster="' + esc(M.filmPoster(f.file)) + '"></video>' +
            '<span class="meta"><span><span class="tag">' + esc(f.tag) + '</span>' +
-           '<h3>' + esc(f.title) + '</h3></span><span class="play">&#9654;</span></span></button>';
+           '<h3>' + esc(f.title) + '</h3></span><span class="play">' +
+           (f.link ? '&#8599;' : '&#9654;') + '</span></span></button>';
   }).join('');
 
   [].forEach.call(document.querySelectorAll('.film'), function (card) {
@@ -353,11 +354,16 @@ footer .wrap{display:flex;justify-content:space-between;font-size:12px;color:var
       v.play().catch(function () {});
     });
     card.addEventListener('mouseleave', function () { v.pause(); });
-    card.addEventListener('click', function () { openFilm(film); });
+    card.addEventListener('click', function () {
+      if (film.link) window.open(film.link, '_blank', 'noopener');
+      else openFilm(film);          /* ohne Link: Film in der Seite abspielen */
+    });
   });
 
   /* ---------- Fotos + Filter ---------- */
   var photos = SITE.photos.slice();
+  /* Der Tag ist der erste Pfadteil — er kann dem Ablageort nie widersprechen. */
+  photos.forEach(function (p) { p.cat = p.file.split('/')[0]; });
   $('#grid').innerHTML = photos.map(function (p, i) {
     return '<figure class="cell r" data-cat="' + esc(p.cat) + '" data-i="' + i + '">' +
            '<img loading="lazy" src="' + esc(M.thumb(p.file)) + '" alt="' + esc(p.alt || p.cat) + '">' +

@@ -1,16 +1,20 @@
 /* ============================================================
    data.js — HIER pflegst du deine Inhalte.
 
-   Pfade stehen hier NICHT mehr drin, nur noch Dateinamen.
-   Wo die Datei liegt, ergibt sich aus der Struktur:
+   Pfade stehen hier nicht drin, nur Dateinamen. Wo eine Datei
+   liegt, ergibt sich aus der Struktur:
 
-     hero     -> media/hero/<datei>
-     films    -> media/films/<file>.mp4  +  media/films/<file>-poster.jpg
-     photos   -> media/photos/thumbs/<file>  +  media/photos/full/<file>
+     Banner  ->  media/hero/<datei>
+     Filme   ->  media/films/<file>.mp4
+                 media/films/<file>-preview.mp4
+                 media/films/<file>-poster.jpg
+     Fotos   ->  media/photos/full/<Tag>/<datei>
+                 media/photos/thumbs/<Tag>/<datei>   (gleicher Name!)
 
-   Ein Film braucht also zwei Dateien mit demselben Namen, ein Foto
-   zwei Dateien mit demselben Namen in verschiedenen Ordnern.
-   Kommas am Zeilenende nicht vergessen.
+   Ein neues Foto: in den passenden Tag-Ordner legen (beide
+   Auflösungen) und hier eine Zeile "Tag/dateiname" ergänzen.
+   Die Kategorie liest die Seite aus dem Ordnernamen — sie kann
+   also nie im Widerspruch zum Ablageort stehen.
    ============================================================ */
 
 const SITE = {
@@ -24,14 +28,26 @@ const SITE = {
   instagram: "https://www.instagram.com/maxbehrfoto/",
   linkedin:  "https://www.linkedin.com/in/max-behr-267695304/",
 
-  /* ---------- Banner ----------
-     Beide Dateien liegen in media/hero/.
-     Das Poster sollte das erste Bild des Loops sein. */
+  /* ---------- Banner ---------- */
   heroVideo:  "hero.mp4",
   heroPoster: "hero-poster.jpg",
 
-  /* ---------- Laufband unter dem Banner ---------- */
-  marquee: ["Automotive", "Watches", "New York", "Lago di Como", "St. Moritz", "The Alps", "Rimini", "Les Baux"],
+  /* ---------- Laufband: Orte, an denen du gedreht hast ---------- */
+  marquee: [
+    "Frankfurt",
+    "New York",
+    "Paris",
+    "Côte d'Azur",
+    "St. Moritz",
+    "Berlin",
+    "Stuttgart",
+    "Hamburg",
+    "Lago di Como",
+    "Les Baux-de-Provence",
+    "Rimini",
+    "Denmark",
+    "Greece"
+  ],
 
   /* ---------- Über mich ---------- */
   aboutTitle: "Behind the camera",
@@ -39,7 +55,7 @@ const SITE = {
     "I am Max — photographer and filmmaker. It started with a camera at car meets and on hikes through the Alps, and it never really stopped. Today most of my work is automotive, watches and travel: the same obsession with surfaces, reflections and light.",
     "I work small and fast. One person, two cameras, stills and motion from the same set of eyes — which keeps the day light on set and the look consistent across everything you get back."
   ],
-  aboutImage: "img7-2.jpeg",          /* aus media/photos/full/ */
+  aboutImage: "Automotive/img7-2.jpeg",
   stats: [
     { big: "10+", label: "Films released" },
     { big: "6",   label: "Countries shot" },
@@ -54,65 +70,63 @@ const SITE = {
   ],
 
   /* ---------- FILME ----------
-     file: Dateiname OHNE Endung. Es müssen zwei Dateien existieren:
-           media/films/<file>.mp4  und  media/films/<file>-poster.jpg
      size: "wide" (7 von 12 Spalten) | "half" (5) | "third" (4)
-           Pro Zeile sollte die Summe 12 ergeben. */
+           Pro Zeile sollte die Summe 12 ergeben.
+     link: Wohin der Klick führt — Projektseite oder YouTube.
+           null = kein Link, dann öffnet der Klick den Film selbst. */
   films: [
-    { file: "yamaha",         title: "Yamaha",          tag: "Brand Film", size: "wide"  },
-    { file: "anna",           title: "Powered By Anna", tag: "Portrait",   size: "half"  },
-    { file: "scuderia-mensa", title: "Scuderia Mensa",  tag: "Motorsport", size: "half"  },
-    { file: "como",           title: "Lake Como",       tag: "Travel",     size: "wide"  },
-    { file: "st-moritz",      title: "St. Moritz",      tag: "Winter",     size: "third" },
-    { file: "rimini",         title: "Rimini",          tag: "Travel",     size: "third" },
-    { file: "les-baux",       title: "Les Baux",        tag: "Travel",     size: "third" }
+    { file: "yamaha",        title: "Yamaha",            tag: "Brand Film",    size: "wide",     link: "https://youtu.be/dXot1uMNhaE" },
+    { file: "anna",          title: "Powered By Anna",   tag: "Portrait",      size: "half",     link: "https://www.powered-by-anna.de/" },
+    { file: "scuderia-mensa", title: "Scuderia Mensa",    tag: "Motorsport",    size: "half",     link: "https://scuderia-mensa.de/" },
+    { file: "como",          title: "Lake Como",         tag: "Travel",        size: "wide",     link: "https://www.fuoriconcorso.org/" },
+    { file: "st-moritz",     title: "St. Moritz",        tag: "Winter",        size: "third",    link: "https://www.youtube.com/watch?v=Ro43zP41ol0" },
+    { file: "rimini",        title: "Rimini",            tag: "Travel",        size: "third",    link: "https://youtu.be/ZWruihi-DpU" },
+    { file: "les-baux",      title: "Les Baux",          tag: "Travel",        size: "third",    link: null }
   ],
 
   /* ---------- FOTOS ----------
-     file: derselbe Dateiname in media/photos/thumbs/ und media/photos/full/
-     cat:  einer der Namen aus photoFilters
-     Reihenfolge hier = Reihenfolge auf der Seite. */
+     "Tag/dateiname" — der Tag ist zugleich der Ordner und der Filter. */
   photoFilters: ["Automotive", "Watches", "Travel", "Cities"],
 
   photos: [
-    { file: "img4-2.jpeg",  cat: "Automotive" },
-    { file: "img5-1.jpeg",  cat: "Automotive" },
-    { file: "img5-2.jpeg",  cat: "Automotive" },
-    { file: "img5-3.jpeg",  cat: "Automotive" },
-    { file: "img6-2.jpeg",  cat: "Automotive" },
-    { file: "img6-3.jpeg",  cat: "Automotive" },
-    { file: "img7-1.jpeg",  cat: "Automotive" },
-    { file: "img7-2.jpeg",  cat: "Automotive" },
-    { file: "img7-3.jpeg",  cat: "Automotive" },
-    { file: "img9-2.jpeg",  cat: "Automotive" },
-    { file: "img9-3.jpeg",  cat: "Automotive" },
-    { file: "img10-1.jpeg", cat: "Automotive" },
-    { file: "img10-3.jpeg", cat: "Automotive" },
-    { file: "img11-1.jpeg", cat: "Automotive" },
-    { file: "img11-2.jpeg", cat: "Automotive" },
-    { file: "img11-3.jpeg", cat: "Automotive" },
+    { file: "Automotive/img4-2.jpeg" },
+    { file: "Automotive/img5-1.jpeg" },
+    { file: "Automotive/img5-2.jpeg" },
+    { file: "Automotive/img5-3.jpeg" },
+    { file: "Automotive/img6-2.jpeg" },
+    { file: "Automotive/img6-3.jpeg" },
+    { file: "Automotive/img7-1.jpeg" },
+    { file: "Automotive/img7-2.jpeg" },
+    { file: "Automotive/img7-3.jpeg" },
+    { file: "Automotive/img9-2.jpeg" },
+    { file: "Automotive/img9-3.jpeg" },
+    { file: "Automotive/img10-1.jpeg" },
+    { file: "Automotive/img10-3.jpeg" },
+    { file: "Automotive/img11-1.jpeg" },
+    { file: "Automotive/img11-2.jpeg" },
+    { file: "Automotive/img11-3.jpeg" },
 
-    { file: "img12-1.jpeg", cat: "Watches" },
-    { file: "img12-2.jpeg", cat: "Watches" },
-    { file: "img12-3.jpeg", cat: "Watches" },
+    { file: "Watches/img12-1.jpeg" },
+    { file: "Watches/img12-2.jpeg" },
+    { file: "Watches/img12-3.jpeg" },
 
-    { file: "img4-1.jpeg",  cat: "Travel" },
-    { file: "img4-3.jpeg",  cat: "Travel" },
-    { file: "img6-1.jpeg",  cat: "Travel" },
-    { file: "img8-1.jpeg",  cat: "Travel" },
-    { file: "img8-2.jpeg",  cat: "Travel" },
-    { file: "img8-3.jpeg",  cat: "Travel" },
-    { file: "img9-1.jpeg",  cat: "Travel" },
-    { file: "img10-2.jpeg", cat: "Travel" },
+    { file: "Travel/img4-1.jpeg" },
+    { file: "Travel/img4-3.jpeg" },
+    { file: "Travel/img6-1.jpeg" },
+    { file: "Travel/img8-1.jpeg" },
+    { file: "Travel/img8-2.jpeg" },
+    { file: "Travel/img8-3.jpeg" },
+    { file: "Travel/img9-1.jpeg" },
+    { file: "Travel/img10-2.jpeg" },
 
-    { file: "img1-1.jpeg",  cat: "Cities" },
-    { file: "img1-2.jpeg",  cat: "Cities" },
-    { file: "img1-3.jpeg",  cat: "Cities" },
-    { file: "img2-1.jpeg",  cat: "Cities" },
-    { file: "img2-2.jpeg",  cat: "Cities" },
-    { file: "img2-3.jpeg",  cat: "Cities" },
-    { file: "img3-1.jpeg",  cat: "Cities" },
-    { file: "img3-2.jpeg",  cat: "Cities" },
-    { file: "img3-3.jpeg",  cat: "Cities" }
+    { file: "Cities/img1-1.jpeg" },
+    { file: "Cities/img1-2.jpeg" },
+    { file: "Cities/img1-3.jpeg" },
+    { file: "Cities/img2-1.jpeg" },
+    { file: "Cities/img2-2.jpeg" },
+    { file: "Cities/img2-3.jpeg" },
+    { file: "Cities/img3-1.jpeg" },
+    { file: "Cities/img3-2.jpeg" },
+    { file: "Cities/img3-3.jpeg" }
   ]
 };
