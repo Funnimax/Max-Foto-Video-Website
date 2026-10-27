@@ -21,8 +21,8 @@ const SITE = {
 
   /* ---------- Kopf / Kontakt ---------- */
   name:      "Max Behr",
-  role:      "Automotive, watch & travel filmmaker — based in Germany, shooting across Europe",
-  headline:  'How <em>curiosity</em><br>brings you <em>further.</em>',
+  role:      "Filmmaker and photographer — based in Germany, shooting across Europe",
+  headline:  'How <em>curiosity</em><br>brings you<br><em>further.</em>',
   intro:     "Films and stills for automotive, events, brands and travel. Let's make your vision reality.",
   email:     "maxbehrbusiness@gmail.com",
   instagram: "https://www.instagram.com/maxbehrfoto/",
