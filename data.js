@@ -22,8 +22,8 @@ const SITE = {
   /* ---------- Kopf / Kontakt ---------- */
   name:      "Max Behr",
   role:      "Automotive, watch & travel filmmaker — based in Germany, shooting across Europe",
-  headline:  'Cars, watches,<br>and the <em>roads<br>between them.</em>',
-  intro:     "Films and stills for automotive, watch and travel brands. One person, two cameras, from the first idea to the final grade. Commissions open for 2026.",
+  headline:  'How curiosity<br>brings you <em>further.</em>',
+  intro:     "Films and stills for automotive, events, brands and travel. Let's make your vision reality.",
   email:     "maxbehrbusiness@gmail.com",
   instagram: "https://www.instagram.com/maxbehrfoto/",
   linkedin:  "https://www.linkedin.com/in/max-behr-267695304/",
@@ -75,11 +75,13 @@ const SITE = {
   ],
   /* ---------- Leistungen ---------- */
   services: [
-    { title: "Automotive",            text: "Static, rolling and track. A finished film plus a full gallery of stills from the same two days." },
-    { title: "Watches & product",     text: "Macro, motion and controlled light for pieces that have to look as expensive as they are." },
-    { title: "Travel & brand stories",text: "Multi-day coverage on location, cut for web, reels and paid — delivered in every ratio you need." }
+    { title: "Commercials",
+      text: "Brand films for products, cars and the people behind them \u2014 concept, shoot, edit and grade." },
+    { title: "Documentaries",
+      text: "Longer form, for a story that needs more room than thirty seconds." },
+    { title: "Event coverage",
+      text: "On location, stills and motion from the same day. Photos within 24 hours, the first cut within 48." }
   ],
-
   /* ---------- FILME ----------
      size: "wide" (7 von 12 Spalten) | "half" (5) | "third" (4)
            Pro Zeile sollte die Summe 12 ergeben.
@@ -87,7 +89,7 @@ const SITE = {
            null = kein Link, dann öffnet der Klick den Film selbst. */
   films: [
     { file: "yamaha",        title: "Yamaha",            tag: "Brand Film",    size: "wide",     link: "https://youtu.be/dXot1uMNhaE" },
-    { file: "anna",          title: "Powered By Anna",   tag: "Portrait",      size: "half",     link: "https://www.powered-by-anna.de/" },
+    { file: "anna",          title: "Powered By Anna",   tag: "Commercial",      size: "half",     link: "https://www.powered-by-anna.de/" },
     { file: "scuderia-mensa", title: "Scuderia Mensa",    tag: "Motorsport",    size: "half",     link: "https://scuderia-mensa.de/" },
     { file: "como",          title: "Lake Como",         tag: "Travel",        size: "wide",     link: "https://www.fuoriconcorso.org/" },
     { file: "st-moritz",     title: "St. Moritz",        tag: "Winter",        size: "third",    link: "https://www.youtube.com/watch?v=Ro43zP41ol0" },
