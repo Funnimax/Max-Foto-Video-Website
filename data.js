@@ -52,16 +52,27 @@ const SITE = {
   /* ---------- Über mich ---------- */
   aboutTitle: "Behind the camera",
   aboutText: [
-    "I am Max — photographer and filmmaker. It started with a camera at car meets and on hikes through the Alps, and it never really stopped. Today most of my work is automotive, watches and travel: the same obsession with surfaces, reflections and light.",
-    "I work small and fast. One person, two cameras, stills and motion from the same set of eyes — which keeps the day light on set and the look consistent across everything you get back."
+    "I started in 2018, cutting clips of gaming sessions for friends. Then I bought a camera — a Sony \u03b16400 — and pointed it at their cars. Motorcycles came next, then the trips, and eventually the brands that wanted the same thing.",
+    "What I care about is technical precision. Colour and camera movement above everything else: if a shot doesn't hold up on that level, it doesn't go out.",
+    "I work alone, which keeps the day light on set and the look consistent across everything you get back. After an event you have the stills within 24 hours and the first cut within 48."
   ],
-  aboutImage: "Automotive/img7-2.jpeg",
+  aboutImage: "portrait.jpg",          /* liegt in media/about/ */
+
   stats: [
-    { big: "10+", label: "Films released" },
-    { big: "6",   label: "Countries shot" },
-    { big: "1:1", label: "You work with me" }
+    { big: "2018", label: "Shooting since" },
+    { big: "24 h", label: "Stills after an event" },
+    { big: "48 h", label: "First cut" }
   ],
 
+  /* ---------- Auftraggeber und Veroeffentlichungen ----------
+     Nur Namen, keine Logos. Neue Zeile hinzufuegen = Komma nicht vergessen. */
+  credits: [
+    { label: "Selected clients",
+      names: ["Mercedes-Benz", "Mercedes-Benz Museum", "Nassauische Sparkasse",
+              "Justus-Liebig-Universit\u00e4t Gie\u00dfen"] },
+    { label: "Published in",
+      names: ["Auto Bild", "Stuttgarter Zeitung", "Sindelfinger Zeitung", "GV-Praxis"] }
+  ],
   /* ---------- Leistungen ---------- */
   services: [
     { title: "Automotive",            text: "Static, rolling and track. A finished film plus a full gallery of stills from the same two days." },
