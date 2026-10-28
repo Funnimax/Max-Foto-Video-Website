@@ -226,7 +226,7 @@ footer .wrap{display:flex;justify-content:space-between;font-size:12px;color:var
     <div class="shead r">
       <span class="eyebrow">01 — Motion</span>
       <h2>Selected films</h2>
-      <span class="eyebrow">Hover to preview · click for more</span>
+      <span class="eyebrow" id="filmHint">Hover to preview · click for more</span>
     </div>
     <div class="films" id="filmGrid"></div>
   </div>
@@ -380,15 +380,63 @@ footer .wrap{display:flex;justify-content:space-between;font-size:12px;color:var
            (f.link ? '&#8599;' : '&#9654;') + '</span></span></button>';
   }).join('');
 
+  /* ---------- Filmkacheln: Hover am Desktop, Bildschirmmitte am Handy ----------
+     Auf Touchgeraeten gibt es kein Hover. Dort spielt stattdessen immer die
+     Kachel, die der Mitte des Bildschirms am naechsten liegt - eine nach der
+     anderen, und die Vorschau wird erst geladen, wenn sie an der Reihe ist. */
+  var touchOnly = window.matchMedia('(hover: none)').matches;
+
+  function loadPreview(card) {
+    var v = card.querySelector('video');
+    if (!v.getAttribute('src')) {
+      var f = SITE.films[+card.dataset.film];
+      v.muted = true; v.defaultMuted = true; v.playsInline = true;
+      v.setAttribute('webkit-playsinline', '');
+      v.setAttribute('src', M.preview(f.file));
+    }
+    return v;
+  }
+
+  if (touchOnly) {
+    var hint = document.getElementById('filmHint');
+    if (hint) hint.textContent = 'Scroll to preview \u00b7 tap for more';
+    var cards = [].slice.call(document.querySelectorAll('.film'));
+    var active = null, ticking = false;
+
+    var pickCentre = function () {
+      ticking = false;
+      var mid = innerHeight / 2, best = null, bestD = Infinity;
+      cards.forEach(function (card) {
+        var r = card.getBoundingClientRect();
+        if (r.bottom < 0 || r.top > innerHeight) return;      /* nicht im Bild */
+        var d = Math.abs(r.top + r.height / 2 - mid);
+        if (d < bestD) { bestD = d; best = card; }
+      });
+      if (best === active) return;
+      if (active) { var old = active.querySelector('video'); if (old) old.pause(); }
+      active = best;
+      if (active) loadPreview(active).play().catch(function () {});
+    };
+
+    var onScroll = function () {
+      if (ticking) return;
+      ticking = true;
+      requestAnimationFrame(pickCentre);
+    };
+    addEventListener('scroll', onScroll, { passive: true });
+    addEventListener('resize', onScroll, { passive: true });
+    pickCentre();
+  }
+
   [].forEach.call(document.querySelectorAll('.film'), function (card) {
     var film = SITE.films[+card.dataset.film];
     var v = card.querySelector('video');
-    card.addEventListener('mouseenter', function () {
-      /* Hover laedt nur die kleine stumme Vorschau, nicht den ganzen Film. */
-      if (!v.getAttribute('src')) v.setAttribute('src', M.preview(film.file));
-      v.play().catch(function () {});
-    });
-    card.addEventListener('mouseleave', function () { v.pause(); });
+    if (!touchOnly) {
+      card.addEventListener('mouseenter', function () {
+        loadPreview(card).play().catch(function () {});
+      });
+      card.addEventListener('mouseleave', function () { v.pause(); });
+    }
     card.addEventListener('click', function () {
       if (film.link) window.open(film.link, '_blank', 'noopener');
       else openFilm(film);          /* ohne Link: Film in der Seite abspielen */
