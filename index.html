@@ -3,21 +3,35 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Max Behr — Automotive, Watch &amp; Travel Filmmaker</title>
-<meta name="description" content="Films and stills for automotive, watch and travel brands. Based in Germany, shooting across Europe.">
+<title>Max Behr — Filmmaker &amp; Photographer</title>
+<meta name="description" content="Films and stills for automotive, events, brands and travel. Filmmaker and photographer based in Germany, shooting across Europe.">
 <link rel="canonical" href="https://maxbehr.com/">
-<link rel="icon" type="image/png" href="media/ui/favicon-square.png">
-<meta property="og:title" content="Max Behr — Automotive, Watch &amp; Travel Filmmaker">
-<meta property="og:description" content="Films and stills for automotive, watch and travel brands.">
-<meta property="og:image" content="https://maxbehr.com/media/photos/full/img10-3.jpeg">
+<link rel="icon" type="image/png" sizes="64x64" href="media/ui/favicon-64.png">
+<link rel="apple-touch-icon" href="media/ui/apple-touch-icon.png">
+<meta property="og:title" content="Max Behr — Filmmaker &amp; Photographer">
+<meta property="og:description" content="Films and stills for automotive, events, brands and travel.">
+<meta property="og:image" content="https://maxbehr.com/media/photos/full/Automotive/img10-3.jpeg">
+<meta property="og:image:width" content="2400">
+<meta property="og:image:height" content="1600">
+<meta property="og:url" content="https://maxbehr.com/">
 <meta property="og:type" content="website">
+<meta name="twitter:card" content="summary_large_image">
 <meta name="theme-color" content="#0a0a0b">
 
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Inter+Tight:wght@300;400;500&display=swap" rel="stylesheet">
+<!-- Schriften liegen in media/fonts - es wird nichts von Google geladen
+     (so steht es auch in der Datenschutzerklaerung). -->
+<link rel="preload" href="media/fonts/inter-tight-var.woff" as="font" type="font/woff" crossorigin>
+<link rel="preload" href="media/fonts/instrument-serif.woff" as="font" type="font/woff" crossorigin>
 
 <style>
+/* ========== SCHRIFTEN (lokal) ========== */
+@font-face{font-family:'Inter Tight';src:url(media/fonts/inter-tight-var.woff) format('woff');
+  font-weight:300 500;font-style:normal;font-display:swap}
+@font-face{font-family:'Instrument Serif';src:url(media/fonts/instrument-serif.woff) format('woff');
+  font-weight:400;font-style:normal;font-display:swap}
+@font-face{font-family:'Instrument Serif';src:url(media/fonts/instrument-serif-italic.woff) format('woff');
+  font-weight:400;font-style:italic;font-display:swap}
+
 /* ========== BASIS ========== */
 *{box-sizing:border-box;margin:0;padding:0}
 :root{
@@ -159,6 +173,7 @@ footer .wrap{display:flex;justify-content:space-between;font-size:12px;color:var
 .lb .x{top:10px;right:14px}
 .lb .pv{left:2px;top:50%;transform:translateY(-50%)}
 .lb .nx{right:2px;top:50%;transform:translateY(-50%)}
+.lb.film .pv,.lb.film .nx{display:none}
 .lb .count{position:absolute;bottom:16px;left:0;right:0;text-align:center;font-size:11px;letter-spacing:.2em;color:#8f8b86}
 
 /* ========== SCROLL-ANIMATION ========== */
@@ -281,7 +296,7 @@ footer .wrap{display:flex;justify-content:space-between;font-size:12px;color:var
 <footer>
   <div class="wrap">
     <span>&copy; <span id="year"></span> <span id="footName"></span></span>
-    <span><a href="impressum.html">Impressum</a> · <a href="impressum.html">Datenschutz</a></span>
+    <span><a href="impressum.html">Impressum</a> · <a href="impressum.html#datenschutz">Datenschutz</a></span>
   </div>
 </footer>
 
@@ -425,6 +440,7 @@ footer .wrap{display:flex;justify-content:space-between;font-size:12px;color:var
     };
     addEventListener('scroll', onScroll, { passive: true });
     addEventListener('resize', onScroll, { passive: true });
+    window.resumePreview = function () { active = null; pickCentre(); };
     pickCentre();
   }
 
@@ -448,7 +464,7 @@ footer .wrap{display:flex;justify-content:space-between;font-size:12px;color:var
   /* Der Tag ist der erste Pfadteil — er kann dem Ablageort nie widersprechen. */
   photos.forEach(function (p) { p.cat = p.file.split('/')[0]; });
   $('#grid').innerHTML = photos.map(function (p, i) {
-    return '<figure class="cell r" data-cat="' + esc(p.cat) + '" data-i="' + i + '">' +
+    return '<figure class="cell r" tabindex="0" role="button" data-cat="' + esc(p.cat) + '" data-i="' + i + '">' +
            '<img loading="lazy" src="' + esc(M.thumb(p.file)) + '" alt="' + esc(p.alt || p.cat) + '">' +
            '<figcaption>' + esc(p.cat) + '</figcaption></figure>';
   }).join('');
@@ -470,6 +486,10 @@ footer .wrap{display:flex;justify-content:space-between;font-size:12px;color:var
   $('#grid').addEventListener('click', function (e) {
     var c = e.target.closest('.cell'); if (c) openPhoto(+c.dataset.i);
   });
+  $('#grid').addEventListener('keydown', function (e) {
+    var c = e.target.closest('.cell');
+    if (c && (e.key === 'Enter' || e.key === ' ')) { e.preventDefault(); openPhoto(+c.dataset.i); }
+  });
 
   /* ---------- Lightbox ---------- */
   var lb = $('#lb'), lbBody = $('#lbBody'), lbCount = $('#lbCount'), cur = -1;
@@ -479,21 +499,25 @@ footer .wrap{display:flex;justify-content:space-between;font-size:12px;color:var
       return c.style.display !== 'none';
     }).map(function (c) { return +c.dataset.i; });
   }
+  function pausePreviews() {
+    [].forEach.call(document.querySelectorAll('.film video'), function (v) { v.pause(); });
+  }
   function openPhoto(i) {
-    cur = i;
+    cur = i; pausePreviews(); lb.classList.remove('film');
     var p = photos[i], list = visible();
     lbBody.innerHTML = '<img src="' + esc(M.full(p.file)) + '" alt="' + esc(p.alt || p.cat) + '">';
     lbCount.textContent = (list.indexOf(i) + 1) + ' / ' + list.length + '  ·  ' + p.cat;
     lb.classList.add('on'); document.body.style.overflow = 'hidden';
   }
   function openFilm(f) {
-    cur = -1;
+    cur = -1; pausePreviews(); lb.classList.add('film');
     lbBody.innerHTML = '<video src="' + esc(M.film(f.file)) + '" controls autoplay playsinline></video>';
     lbCount.textContent = f.title;
     lb.classList.add('on'); document.body.style.overflow = 'hidden';
   }
   function closeLb() {
     lb.classList.remove('on'); lbBody.innerHTML = ''; document.body.style.overflow = '';
+    if (window.resumePreview) window.resumePreview();   /* Handy: Mitte wieder abspielen */
   }
   function step(d) {
     if (cur < 0) return;
