@@ -32,10 +32,12 @@ html{scroll-behavior:smooth;overflow-x:hidden}
 body{background:var(--bg);color:var(--fg);font-family:'Inter Tight',system-ui,-apple-system,sans-serif;
      font-weight:300;-webkit-font-smoothing:antialiased;overflow-x:hidden}
 img,video{display:block;max-width:100%}
-/* iOS legt sonst einen grossen Play-Knopf ueber jedes Video */
-video::-webkit-media-controls{display:none!important}
-video::-webkit-media-controls-start-playback-button{display:none!important;-webkit-appearance:none}
-video::-webkit-media-controls-panel{display:none!important}
+/* iOS legt sonst einen Play-Knopf ueber Hintergrundvideos. Nur dort ausblenden -
+   das Video in der Lightbox braucht seine Bedienelemente. */
+.hero video::-webkit-media-controls,
+.film video::-webkit-media-controls{display:none!important}
+.hero video::-webkit-media-controls-start-playback-button,
+.film video::-webkit-media-controls-start-playback-button{display:none!important;-webkit-appearance:none}
 a{color:inherit;text-decoration:none}
 .wrap{max-width:var(--max);margin:0 auto;padding:0 clamp(18px,4vw,56px)}
 .eyebrow{font-size:11px;letter-spacing:.22em;text-transform:uppercase;color:var(--mut)}
@@ -330,7 +332,17 @@ footer .wrap{display:flex;justify-content:space-between;font-size:12px;color:var
   hv.muted = true; hv.defaultMuted = true; hv.playsInline = true;
   hv.setAttribute('webkit-playsinline', '');
   hv.src = M.hero(SITE.heroVideo);
-  hv.play().catch(function () {});          /* kein Video? Poster bleibt stehen. */
+  hv.play().catch(function () {
+    /* iOS blockt Autoplay u.a. im Stromsparmodus. Dann startet die erste
+       Berührung irgendwo auf der Seite den Loop nach. */
+    var start = function () {
+      hv.play().catch(function () {});
+      document.removeEventListener('touchstart', start);
+      document.removeEventListener('click', start);
+    };
+    document.addEventListener('touchstart', start, { passive: true });
+    document.addEventListener('click', start);
+  });
   hv.addEventListener('error', function () { hv.removeAttribute('src'); });
 
   /* ---------- Laufband ---------- */
