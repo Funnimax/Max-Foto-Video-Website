@@ -83,11 +83,12 @@ const SITE = {
       text: "On location, stills and motion from the same day. Photos within 24 hours, the first cut within 48." }
   ],
   /* ---------- FILME ----------
-     size: "wide" (7 von 12 Spalten) | "half" (5) | "third" (4)
+     size: "full" (ganze Breite, Kinoformat) | "wide" (7 von 12 Spalten) | "half" (5) | "third" (4)
            Pro Zeile sollte die Summe 12 ergeben.
      link: Wohin der Klick führt — Projektseite oder YouTube.
            null = kein Link, dann öffnet der Klick den Film selbst. */
   films: [
+    { file: "new-york",      title: "New York",          tag: "Travel",        size: "full",     link: "https://www.instagram.com/p/Dd_ULkGCDMN/" },
     { file: "yamaha",        title: "Yamaha",            tag: "Brand Film",    size: "wide",     link: "https://youtu.be/dXot1uMNhaE" },
     { file: "anna",          title: "Powered By Anna",   tag: "Commercial",      size: "half",     link: "https://www.powered-by-anna.de/" },
     { file: "scuderia-mensa", title: "Scuderia Mensa",    tag: "Motorsport",    size: "half",     link: "https://scuderia-mensa.de/" },

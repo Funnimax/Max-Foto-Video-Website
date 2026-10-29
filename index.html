@@ -114,7 +114,7 @@ section{padding:clamp(64px,10vh,132px) 0}
 .play{width:42px;height:42px;border-radius:50%;border:1px solid rgba(255,255,255,.5);
       display:grid;place-items:center;flex:0 0 auto;font-size:11px;transition:.3s}
 .film:hover .play{background:var(--fg);color:#000;border-color:var(--fg)}
-.wide{grid-column:span 7}.half{grid-column:span 5}.third{grid-column:span 4}
+.full{grid-column:span 12;aspect-ratio:21/9}.wide{grid-column:span 7}.half{grid-column:span 5}.third{grid-column:span 4}
 
 /* ========== FOTOS ========== */
 .filters{display:flex;gap:9px;flex-wrap:wrap;margin-bottom:28px}
@@ -196,6 +196,7 @@ footer .wrap{display:flex;justify-content:space-between;font-size:12px;color:var
   nav a{padding:14px clamp(18px,4vw,56px);font-size:15px}
   header .btn{display:none}
   .films>*{grid-column:span 12}
+  .film.full{aspect-ratio:16/9}
   .about{grid-template-columns:1fr}
   .svc{grid-template-columns:1fr}
 }
