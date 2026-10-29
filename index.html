@@ -114,13 +114,14 @@ section{padding:clamp(64px,10vh,132px) 0}
 .play{width:42px;height:42px;border-radius:50%;border:1px solid rgba(255,255,255,.5);
       display:grid;place-items:center;flex:0 0 auto;font-size:11px;transition:.3s}
 .film:hover .play{background:var(--fg);color:#000;border-color:var(--fg)}
-/* Ladeanzeige: ein feiner Ring dreht sich um den Play-Knopf, bis die Vorschau laeuft */
-.play{position:relative}
-.play::after{content:"";position:absolute;inset:-6px;border-radius:50%;border:2px solid transparent;
-  border-top-color:var(--sand);border-right-color:rgba(217,199,175,.35);opacity:0;transition:opacity .25s}
-.film.loading .play::after{opacity:1;animation:spin .9s linear infinite}
-@keyframes spin{to{transform:rotate(360deg)}}
-@media(prefers-reduced-motion:reduce){.film.loading .play::after{animation-duration:2.4s}}
+/* Ladeanzeige: schmaler Balken in der Mitte. Halb durchsichtig, fuellt sich von
+   links nach rechts weiss, waehrend die Vorschau laedt. */
+.ld{position:absolute;left:50%;top:50%;width:min(140px,32%);height:3px;transform:translate(-50%,-50%);
+    background:rgba(255,255,255,.25);border-radius:3px;overflow:hidden;opacity:0;transition:opacity .3s;
+    pointer-events:none;z-index:1;box-shadow:0 0 14px rgba(0,0,0,.35)}
+.ld i{display:block;height:100%;background:#fff;border-radius:3px;
+      transform:scaleX(var(--p,0));transform-origin:left;transition:transform .3s ease-out}
+.film.loading .ld{opacity:1}
 .full{grid-column:span 12;aspect-ratio:21/9}.wide{grid-column:span 7}.half{grid-column:span 5}.third{grid-column:span 4}
 
 /* ========== FOTOS ========== */
@@ -419,6 +420,7 @@ footer .wrap{display:flex;justify-content:space-between;font-size:12px;color:var
   $('#filmGrid').innerHTML = SITE.films.map(function (f, i) {
     return '<button class="film r ' + (f.size || 'third') + '" data-film="' + i + '">' +
            '<video muted loop playsinline preload="none" poster="' + esc(M.filmPoster(f.file)) + '"></video>' +
+           '<span class="ld" aria-hidden="true"><i></i></span>' +
            '<span class="meta"><span><span class="tag">' + esc(f.tag) + '</span>' +
            '<h3>' + esc(f.title) + '</h3></span><span class="play">' +
            (f.link ? '&#8599;' : '&#9654;') + '</span></span></button>';
@@ -432,10 +434,18 @@ footer .wrap{display:flex;justify-content:space-between;font-size:12px;color:var
 
   /* Ladeanzeige: erscheint erst nach 150 ms, damit sie bei schon geladenen
      Vorschauen nicht kurz aufblitzt; verschwindet, sobald das Video laeuft. */
-  function setLoading(card, on) {
+  function setLoading(card, on, done) {
     clearTimeout(card._lt);
     if (on) card._lt = setTimeout(function () { card.classList.add('loading'); }, 150);
-    else card.classList.remove('loading');
+    else if (done && card.classList.contains('loading')) {
+      card.style.setProperty('--p', 1);          /* Balken noch voll machen, dann ausblenden */
+      card._lt = setTimeout(function () { card.classList.remove('loading'); }, 300);
+    } else card.classList.remove('loading');
+  }
+  function showProgress(card, v) {
+    if (!v.buffered.length || !isFinite(v.duration) || !v.duration) return;
+    var p = v.buffered.end(v.buffered.length - 1) / v.duration;
+    card.style.setProperty('--p', Math.min(1, Math.max(0, p)).toFixed(3));
   }
   function loadPreview(card) {
     var v = card.querySelector('video');
@@ -443,7 +453,9 @@ footer .wrap{display:flex;justify-content:space-between;font-size:12px;color:var
       var f = SITE.films[+card.dataset.film];
       v.muted = true; v.defaultMuted = true; v.playsInline = true;
       v.setAttribute('webkit-playsinline', '');
-      v.addEventListener('playing', function () { setLoading(card, false); });
+      v.addEventListener('playing', function () { setLoading(card, false, true); });
+      v.addEventListener('progress', function () { showProgress(card, v); });
+      v.addEventListener('loadedmetadata', function () { showProgress(card, v); });
       v.addEventListener('waiting', function () { if (!v.paused) setLoading(card, true); });
       v.addEventListener('pause',   function () { setLoading(card, false); });
       v.addEventListener('error',   function () { setLoading(card, false); });
