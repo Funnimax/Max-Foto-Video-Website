@@ -352,7 +352,18 @@ footer .wrap{display:flex;justify-content:space-between;font-size:12px;color:var
      nicht nur als Attribut, sonst greift es nicht zuverlaessig. */
   hv.muted = true; hv.defaultMuted = true; hv.playsInline = true;
   hv.setAttribute('webkit-playsinline', '');
-  hv.src = M.hero(SITE.heroVideo);
+  /* Das Banner gibt es in drei Formaten. Der Browser bekommt das beste, das er
+     abspielen kann: AV1 (am kleinsten bei gleicher Qualitaet), sonst HEVC
+     (Safari), sonst H.264 (laeuft ueberall). Fehlt eine Datei oder klappt das
+     Abspielen nicht, springt die Seite automatisch zur naechsten. */
+  var heroBase = SITE.heroVideo.replace(/\.mp4$/, '');
+  var heroList = [
+    [heroBase + '-av1.mp4',  'video/mp4; codecs="av01.0.12M.10"'],
+    [heroBase + '-hevc.mp4', 'video/mp4; codecs="hvc1.2.4.L150.B0"'],
+    [heroBase + '.mp4',      '']
+  ].filter(function (c) { return !c[1] || hv.canPlayType(c[1]) === 'probably'; });
+  var heroIdx = 0;
+  hv.src = M.hero(heroList[0][0]);
   hv.play().catch(function () {
     /* iOS blockt Autoplay u.a. im Stromsparmodus. Dann startet die erste
        Berührung irgendwo auf der Seite den Loop nach. */
@@ -364,7 +375,12 @@ footer .wrap{display:flex;justify-content:space-between;font-size:12px;color:var
     document.addEventListener('touchstart', start, { passive: true });
     document.addEventListener('click', start);
   });
-  hv.addEventListener('error', function () { hv.removeAttribute('src'); });
+  hv.addEventListener('error', function () {
+    if (++heroIdx < heroList.length) {         /* naechstes Format probieren */
+      hv.src = M.hero(heroList[heroIdx][0]);
+      hv.play().catch(function () {});
+    } else hv.removeAttribute('src');          /* dann bleibt das Standbild */
+  });
 
   /* ---------- Laufband ---------- */
   var mqOnce = SITE.marquee.map(function (w) {
