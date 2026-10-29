@@ -103,33 +103,39 @@ const SITE = {
             Damit verteilt die Seite die Bilder gleichmaessig auf die Spalten,
             schon bevor sie geladen sind.
      title: optional - Projektname, erscheint beim Drueberfahren.
+     hero:  optional - Hero-Shots stehen ganz oben, je Projekt in einer Reihe.
      Die Reihenfolge hier ist die Reihenfolge auf der Seite (zeilenweise). */
-  photoFilters: ["Automotive", "Events", "Commercial", "Watches", "Travel", "Cities"],
+  photoFilters: ["Automotive", "Events", "Commercial", "Travel", "Cities"],
 
   photos: [
-    /* --- Neue Projekte: zuerst die Hero-Shots, abwechselnd pro Projekt --- */
-    { file: "Automotive/s-klasse-01.jpg", r: 0.667, title: "Mercedes-Benz S-Class" },
-    { file: "Automotive/amg-gt-4-door-01.jpg", r: 0.667, title: "Mercedes-AMG GT 4-Door Coupé" },
-    { file: "Automotive/300-sl-01.jpg", r: 1.5, title: "Mercedes-Benz 300 SL" },
-    { file: "Events/kroelli-01.jpg", r: 1.5, title: "DJ Kroelli" },
+    /* --- Hero-Shots: die Bilder eines Projekts stehen nebeneinander in einer Reihe.
+           hero: true + gleicher title = eine Reihe (max. 3 Bilder). --- */
+    { file: "Automotive/s-klasse-01.jpg", r: 0.667, title: "Mercedes-Benz S-Class", hero: true },
+    { file: "Automotive/s-klasse-02.jpg", r: 0.667, title: "Mercedes-Benz S-Class", hero: true },
+    { file: "Automotive/s-klasse-03.jpg", r: 0.667, title: "Mercedes-Benz S-Class", hero: true },
+
+    { file: "Automotive/amg-gt-4-door-01.jpg", r: 0.667, title: "Mercedes-AMG GT 4-Door Coupé", hero: true },
+    { file: "Automotive/amg-gt-4-door-02.jpg", r: 1.5, title: "Mercedes-AMG GT 4-Door Coupé", hero: true },
+    { file: "Automotive/amg-gt-4-door-03.jpg", r: 0.667, title: "Mercedes-AMG GT 4-Door Coupé", hero: true },
+
+    { file: "Automotive/300-sl-01.jpg", r: 1.5, title: "Mercedes-Benz 300 SL", hero: true },
+    { file: "Automotive/300-sl-02.jpg", r: 1.5, title: "Mercedes-Benz 300 SL", hero: true },
+    { file: "Automotive/300-sl-03.jpg", r: 1.5, title: "Mercedes-Benz 300 SL", hero: true },
+
+    { file: "Events/kroelli-01.jpg", r: 1.5, title: "DJ Kroelli", hero: true },
+    { file: "Events/kroelli-02.jpg", r: 1.5, title: "DJ Kroelli", hero: true },
+    { file: "Events/kroelli-03.jpg", r: 0.667, title: "DJ Kroelli", hero: true },
+
+    { file: "Automotive/s-klasse-04.jpg", r: 1.5, title: "Mercedes-Benz S-Class", hero: true },
+    { file: "Automotive/s-klasse-05.jpg", r: 0.667, title: "Mercedes-Benz S-Class", hero: true },
+    { file: "Automotive/s-klasse-06.jpg", r: 0.667, title: "Mercedes-Benz S-Class", hero: true },
+
+    /* --- Alle weiteren Bilder: Galerie darunter, zeilenweise --- */
     { file: "Commercial/schmidt-bauelemente-01.jpg", r: 0.667, title: "Schmidt Bauelemente" },
     { file: "Automotive/eqs-01.jpg", r: 0.667, title: "Mercedes-Benz EQS" },
     { file: "Events/golf-01.jpg", r: 1.5, title: "Golf event" },
     { file: "Commercial/fragrance-01.jpg", r: 1.311, title: "Fragrance" },
-    { file: "Automotive/s-klasse-02.jpg", r: 0.667, title: "Mercedes-Benz S-Class" },
-    { file: "Automotive/amg-gt-4-door-02.jpg", r: 1.5, title: "Mercedes-AMG GT 4-Door Coupé" },
-    { file: "Automotive/300-sl-02.jpg", r: 1.5, title: "Mercedes-Benz 300 SL" },
-    { file: "Events/kroelli-02.jpg", r: 1.5, title: "DJ Kroelli" },
     { file: "Commercial/schmidt-bauelemente-02.jpg", r: 1.0, title: "Schmidt Bauelemente" },
-    { file: "Automotive/s-klasse-03.jpg", r: 0.667, title: "Mercedes-Benz S-Class" },
-    { file: "Automotive/amg-gt-4-door-03.jpg", r: 0.667, title: "Mercedes-AMG GT 4-Door Coupé" },
-    { file: "Automotive/300-sl-03.jpg", r: 1.5, title: "Mercedes-Benz 300 SL" },
-    { file: "Events/kroelli-03.jpg", r: 0.667, title: "DJ Kroelli" },
-    { file: "Automotive/s-klasse-04.jpg", r: 1.5, title: "Mercedes-Benz S-Class" },
-    { file: "Automotive/s-klasse-05.jpg", r: 0.667, title: "Mercedes-Benz S-Class" },
-    { file: "Automotive/s-klasse-06.jpg", r: 0.667, title: "Mercedes-Benz S-Class" },
-
-    /* --- Weitere Bilder der neuen Projekte --- */
     { file: "Automotive/s-klasse-07.jpg", r: 0.667, title: "Mercedes-Benz S-Class" },
     { file: "Automotive/amg-gt-4-door-04.jpg", r: 0.667, title: "Mercedes-AMG GT 4-Door Coupé" },
     { file: "Automotive/amg-gt-4-door-05.jpg", r: 0.667, title: "Mercedes-AMG GT 4-Door Coupé" },
@@ -161,10 +167,10 @@ const SITE = {
     { file: "Automotive/img11-1.jpeg", r: 1.5 },
     { file: "Automotive/img11-2.jpeg", r: 1.538 },
     { file: "Automotive/img11-3.jpeg", r: 0.667 },
+    { file: "Automotive/img12-3.jpeg", r: 0.667 },
 
-    { file: "Watches/img12-1.jpeg", r: 1.045 },
-    { file: "Watches/img12-2.jpeg", r: 1.0 },
-    { file: "Watches/img12-3.jpeg", r: 0.667 },
+    { file: "Commercial/img12-1.jpeg", r: 1.045 },
+    { file: "Commercial/img12-2.jpeg", r: 1.0 },
 
     { file: "Travel/img4-1.jpeg", r: 1.5 },
     { file: "Travel/img4-3.jpeg", r: 1.5 },
