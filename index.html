@@ -114,6 +114,13 @@ section{padding:clamp(64px,10vh,132px) 0}
 .play{width:42px;height:42px;border-radius:50%;border:1px solid rgba(255,255,255,.5);
       display:grid;place-items:center;flex:0 0 auto;font-size:11px;transition:.3s}
 .film:hover .play{background:var(--fg);color:#000;border-color:var(--fg)}
+/* Ladeanzeige: ein feiner Ring dreht sich um den Play-Knopf, bis die Vorschau laeuft */
+.play{position:relative}
+.play::after{content:"";position:absolute;inset:-6px;border-radius:50%;border:2px solid transparent;
+  border-top-color:var(--sand);border-right-color:rgba(217,199,175,.35);opacity:0;transition:opacity .25s}
+.film.loading .play::after{opacity:1;animation:spin .9s linear infinite}
+@keyframes spin{to{transform:rotate(360deg)}}
+@media(prefers-reduced-motion:reduce){.film.loading .play::after{animation-duration:2.4s}}
 .full{grid-column:span 12;aspect-ratio:21/9}.wide{grid-column:span 7}.half{grid-column:span 5}.third{grid-column:span 4}
 
 /* ========== FOTOS ========== */
@@ -423,14 +430,26 @@ footer .wrap{display:flex;justify-content:space-between;font-size:12px;color:var
      anderen, und die Vorschau wird erst geladen, wenn sie an der Reihe ist. */
   var touchOnly = window.matchMedia('(hover: none)').matches;
 
+  /* Ladeanzeige: erscheint erst nach 150 ms, damit sie bei schon geladenen
+     Vorschauen nicht kurz aufblitzt; verschwindet, sobald das Video laeuft. */
+  function setLoading(card, on) {
+    clearTimeout(card._lt);
+    if (on) card._lt = setTimeout(function () { card.classList.add('loading'); }, 150);
+    else card.classList.remove('loading');
+  }
   function loadPreview(card) {
     var v = card.querySelector('video');
     if (!v.getAttribute('src')) {
       var f = SITE.films[+card.dataset.film];
       v.muted = true; v.defaultMuted = true; v.playsInline = true;
       v.setAttribute('webkit-playsinline', '');
+      v.addEventListener('playing', function () { setLoading(card, false); });
+      v.addEventListener('waiting', function () { if (!v.paused) setLoading(card, true); });
+      v.addEventListener('pause',   function () { setLoading(card, false); });
+      v.addEventListener('error',   function () { setLoading(card, false); });
       v.setAttribute('src', M.preview(f.file));
     }
+    if (v.paused) setLoading(card, true);
     return v;
   }
 
@@ -450,7 +469,7 @@ footer .wrap{display:flex;justify-content:space-between;font-size:12px;color:var
         if (d < bestD) { bestD = d; best = card; }
       });
       if (best === active) return;
-      if (active) { var old = active.querySelector('video'); if (old) old.pause(); }
+      if (active) { var old = active.querySelector('video'); if (old) old.pause(); setLoading(active, false); }
       active = best;
       if (active) loadPreview(active).play().catch(function () {});
     };
@@ -473,7 +492,7 @@ footer .wrap{display:flex;justify-content:space-between;font-size:12px;color:var
       card.addEventListener('mouseenter', function () {
         loadPreview(card).play().catch(function () {});
       });
-      card.addEventListener('mouseleave', function () { v.pause(); });
+      card.addEventListener('mouseleave', function () { v.pause(); setLoading(card, false); });
     }
     card.addEventListener('click', function () {
       if (film.link) window.open(film.link, '_blank', 'noopener');
