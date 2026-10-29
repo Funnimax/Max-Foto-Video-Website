@@ -93,9 +93,10 @@ const SITE = {
     { file: "anna",          title: "Powered By Anna",   tag: "Commercial",      size: "half",     link: "https://www.powered-by-anna.de/" },
     { file: "scuderia-mensa", title: "Scuderia Mensa",    tag: "Motorsport",    size: "half",     link: "https://scuderia-mensa.de/" },
     { file: "como",          title: "Lake Como",         tag: "Travel",        size: "wide",     link: "https://www.fuoriconcorso.org/" },
-    { file: "st-moritz",     title: "St. Moritz",        tag: "Winter",        size: "third",    link: "https://www.youtube.com/watch?v=Ro43zP41ol0" },
-    { file: "rimini",        title: "Rimini",            tag: "Travel",        size: "third",    link: "https://youtu.be/ZWruihi-DpU" },
-    { file: "les-baux",      title: "Les Baux",          tag: "Travel",        size: "third",    link: null }
+    { file: "kroelli",       title: "DJ Kroelli",        tag: "Event Coverage", size: "wide",    link: null },
+    { file: "st-moritz",     title: "St. Moritz",        tag: "Winter",        size: "half",     link: "https://www.youtube.com/watch?v=Ro43zP41ol0" },
+    { file: "rimini",        title: "Rimini",            tag: "Travel",        size: "half",     link: "https://youtu.be/ZWruihi-DpU" },
+    { file: "les-baux",      title: "Les Baux",          tag: "Travel",        size: "wide",     link: null }
   ],
 
   /* ---------- FOTOS ----------
