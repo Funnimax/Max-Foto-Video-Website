@@ -130,6 +130,10 @@ const SITE = {
     { file: "Automotive/s-klasse-05.jpg", r: 0.667, title: "Mercedes-Benz S-Class", hero: true },
     { file: "Automotive/s-klasse-06.jpg", r: 0.667, title: "Mercedes-Benz S-Class", hero: true },
 
+    { file: "Travel/img4-1.jpeg", r: 1.5, title: "Travel", hero: true },
+    { file: "Travel/img4-3.jpeg", r: 1.5, title: "Travel", hero: true },
+    { file: "Travel/img8-2.jpeg", r: 1.333, title: "Travel", hero: true },
+
     /* --- Alle weiteren Bilder: Galerie darunter, zeilenweise --- */
     { file: "Commercial/schmidt-bauelemente-01.jpg", r: 0.667, title: "Schmidt Bauelemente" },
     { file: "Automotive/eqs-01.jpg", r: 0.667, title: "Mercedes-Benz EQS" },
@@ -172,11 +176,8 @@ const SITE = {
     { file: "Commercial/img12-1.jpeg", r: 1.045 },
     { file: "Commercial/img12-2.jpeg", r: 1.0 },
 
-    { file: "Travel/img4-1.jpeg", r: 1.5 },
-    { file: "Travel/img4-3.jpeg", r: 1.5 },
     { file: "Travel/img6-1.jpeg", r: 1.333 },
     { file: "Travel/img8-1.jpeg", r: 1.5 },
-    { file: "Travel/img8-2.jpeg", r: 1.333 },
     { file: "Travel/img8-3.jpeg", r: 0.75 },
     { file: "Travel/img9-1.jpeg", r: 1.5 },
     { file: "Travel/img10-2.jpeg", r: 1.5 },
