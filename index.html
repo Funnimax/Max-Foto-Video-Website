@@ -187,8 +187,9 @@ footer .wrap{display:flex;justify-content:space-between;font-size:12px;color:var
 /* Foto in der Lightbox: erst die Vorschau unscharf, darueber der Ladebalken,
    dann blendet die volle Aufloesung ein. */
 .lbp{position:relative;overflow:hidden;margin:0 auto;max-width:92vw;max-height:86vh}
-.lbp img{position:absolute;inset:0;width:100%;height:100%;max-width:none;max-height:none;object-fit:cover}
-.lbp .lo{filter:blur(7px);transform:scale(1.03)}
+/* .lo ist ein kleines, hochskaliertes Canvas: weich wie ein Blur, aber ohne
+   ausgefranste Raender - deshalb springt beim Wechsel nichts. */
+.lbp img,.lbp canvas{position:absolute;inset:0;width:100%;height:100%;max-width:none;max-height:none;object-fit:cover}
 .lbp .hi{opacity:0;transition:opacity .45s ease}
 .lbp.done .hi{opacity:1}
 .lbp.loading .ld{opacity:1}
@@ -640,6 +641,24 @@ footer .wrap{display:flex;justify-content:space-between;font-size:12px;color:var
   /* Volle Aufloesung per XHR laden, damit der Fortschritt messbar ist.
      Fertig geladene Bilder merkt sich die Seite (beim Zurueckblaettern sofort da). */
   var fullCache = {}, fullReq = null;
+  /* Weiche Vorschau: Bild auf 96 px Breite verkleinern und in Stufen wieder
+     vergroessern. Das wirkt wie ein Blur, nutzt aber nur echte Bildpunkte -
+     die Raender bleiben gefuellt. */
+  function softPreview(cv, src, r) {
+    var im = new Image();
+    im.onload = function () {
+      var w = 96, h = Math.max(1, Math.round(w * r)), cur = document.createElement('canvas');
+      cur.width = w; cur.height = h;
+      var c = cur.getContext('2d'); c.imageSmoothingQuality = 'high'; c.drawImage(im, 0, 0, w, h);
+      for (var k = 2; k <= 8; k *= 2) {
+        var n = k === 8 ? cv : document.createElement('canvas');
+        n.width = w * k; n.height = h * k;
+        var nc = n.getContext('2d'); nc.imageSmoothingQuality = 'high';
+        nc.drawImage(cur, 0, 0, n.width, n.height); cur = n;
+      }
+    };
+    im.src = src;
+  }
   function openPhoto(i) {
     cur = i; pausePreviews(); lb.classList.remove('film');
     var p = photos[i], list = visible(), r = p.r || 1;
@@ -648,13 +667,14 @@ footer .wrap{display:flex;justify-content:space-between;font-size:12px;color:var
     /* gleiche Groesse wie das fertige Bild: so breit wie moeglich, ohne hoeher als 86vh zu werden */
     box.style.width = 'min(92vw, calc(86vh / ' + r + '))';
     box.style.aspectRatio = '1 / ' + r;
-    box.innerHTML = '<img class="lo" alt="" src="' + esc(M.thumb(p.file)) + '">' +
+    box.innerHTML = '<canvas class="lo" aria-hidden="true"></canvas>' +
       '<img class="hi" alt="' + esc(p.alt || p.title || p.cat) + '">' +
       '<span class="ld" aria-hidden="true"><i></i></span>';
     lbBody.innerHTML = ''; lbBody.appendChild(box);
     lbCount.textContent = (list.indexOf(i) + 1) + ' / ' + list.length + '  ·  ' + (p.title || p.cat);
     lb.classList.add('on'); document.body.style.overflow = 'hidden';
 
+    softPreview(box.querySelector('.lo'), M.thumb(p.file), r);
     var hi = box.querySelector('.hi'), L;
     var show = function (url) {
       hi.onload = function () {
