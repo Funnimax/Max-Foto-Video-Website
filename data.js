@@ -110,8 +110,8 @@ const SITE = {
   photos: [
     /* --- Hero-Shots: die Bilder eines Projekts stehen nebeneinander in einer Reihe.
            hero: true + gleicher title = eine Reihe (max. 3 Bilder). --- */
-    { file: "Automotive/s-klasse-01.jpg", r: 0.667, title: "Mercedes-Benz S-Class", hero: true },
     { file: "Automotive/s-klasse-02.jpg", r: 0.667, title: "Mercedes-Benz S-Class", hero: true },
+    { file: "Automotive/s-klasse-01.jpg", r: 0.667, title: "Mercedes-Benz S-Class", hero: true },
     { file: "Automotive/s-klasse-03.jpg", r: 0.667, title: "Mercedes-Benz S-Class", hero: true },
 
     { file: "Automotive/amg-gt-4-door-01.jpg", r: 0.667, title: "Mercedes-AMG GT 4-Door Coupé", hero: true },
