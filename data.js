@@ -75,8 +75,8 @@ const SITE = {
       logos: [
         { file: "mercedes-benz.png",        name: "Mercedes-Benz",          h: 62 },
         { file: "naspa.png",                name: "Nassauische Sparkasse",  h: 52 },
-        { file: "mercedes-benz-museum.png", name: "Mercedes-Benz Museum",   h: 27, stack: true },
-        { file: "jlu-giessen.png",          name: "Justus-Liebig-Universit\u00e4t Gie\u00dfen", h: 34, stack: true }
+        { file: "mercedes-benz-museum.png", name: "Mercedes-Benz Museum",   h: 30 },
+        { file: "jlu-giessen.png",          name: "Justus-Liebig-Universit\u00e4t Gie\u00dfen", h: 38 }
       ],
       names: [] },
     { label: "Published in",
