@@ -68,14 +68,15 @@ const SITE = {
      Nur Namen, keine Logos. Neue Zeile hinzufuegen = Komma nicht vergessen. */
   credits: [
     /* logos: liegen in media/clients/ - weiss auf transparent (PNG oder SVG).
-       scale: optional, falls ein Logo zu gross/klein wirkt (1 = normal).
+       h:     Hoehe am Desktop in Pixeln (Handy etwas kleiner).
+       stack: true = steht mit dem direkt folgenden stack-Logo untereinander.
        Gibt es fuer einen Namen kein Logo, einfach nur in names eintragen. */
     { label: "Selected clients",
       logos: [
-        { file: "mercedes-benz.png",        name: "Mercedes-Benz", scale: 0.85 },
-        { file: "mercedes-benz-museum.png", name: "Mercedes-Benz Museum", scale: 0.85 },
-        { file: "naspa.png",                name: "Nassauische Sparkasse", scale: 0.75 },
-        { file: "jlu-giessen.png",          name: "Justus-Liebig-Universit\u00e4t Gie\u00dfen" }
+        { file: "mercedes-benz.png",        name: "Mercedes-Benz",          h: 62 },
+        { file: "naspa.png",                name: "Nassauische Sparkasse",  h: 52 },
+        { file: "mercedes-benz-museum.png", name: "Mercedes-Benz Museum",   h: 27, stack: true },
+        { file: "jlu-giessen.png",          name: "Justus-Liebig-Universit\u00e4t Gie\u00dfen", h: 34, stack: true }
       ],
       names: [] },
     { label: "Published in",

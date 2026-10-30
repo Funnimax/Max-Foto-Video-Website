@@ -162,7 +162,8 @@ section{padding:clamp(64px,10vh,132px) 0}
 .credits i{font-style:normal;color:var(--mut);padding:0 3px}
 .credits p span{white-space:nowrap}
 /* Kundenlogos: weiss, leicht gedimmt; Groesse gleicht das Script optisch an */
-.logos{display:flex;flex-wrap:wrap;align-items:center;gap:22px 34px;margin-top:4px}
+.logos{display:flex;flex-wrap:wrap;align-items:center;gap:22px 34px;margin-top:8px}
+.logos .stack{display:flex;flex-direction:column;align-items:flex-start;gap:7px}
 .logos img{display:block;width:auto;opacity:.72;transition:opacity .3s}
 .logos img:hover{opacity:1}
 .logos+p{margin-top:12px}
@@ -417,24 +418,33 @@ footer .wrap{display:flex;justify-content:space-between;font-size:12px;color:var
   $('#aboutText').innerHTML = SITE.aboutText.map(function (p) { return '<p>' + esc(p) + '</p>'; }).join('');
   $('#aboutImg').src = M.about(SITE.aboutImage);
   $('#credits').innerHTML = (SITE.credits || []).map(function (c) {
-    var logos = (c.logos || []).map(function (l) {
-      return '<img src="' + esc(M.client(l.file)) + '" alt="' + esc(l.name) + '" title="' + esc(l.name) + '"' +
-             ' data-scale="' + (l.scale || 1) + '" loading="lazy">';
-    }).join('');
+    var logos = '', open = false;
+    (c.logos || []).forEach(function (l) {
+      if (l.stack && !open) { logos += '<span class="stack">'; open = true; }
+      if (!l.stack && open) { logos += '</span>'; open = false; }
+      logos += '<img src="' + esc(M.client(l.file)) + '" alt="' + esc(l.name) + '" title="' + esc(l.name) + '"' +
+               ' data-h="' + (l.h || '') + '" loading="lazy">';
+    });
+    if (open) logos += '</span>';
     var names = (c.names || []).map(function (n) { return '<span>' + esc(n) + '</span>'; }).join(' <i>\u00b7</i> ');
     return '<div><b>' + esc(c.label) + '</b>' +
            (logos ? '<div class="logos">' + logos + '</div>' : '') +
            (names ? '<p>' + names + '</p>' : '') + '</div>';
   }).join('');
-  /* Logos optisch gleich gross: gleiche Flaeche statt gleicher Hoehe.
-     Breite Logos werden flacher, kompakte etwas hoeher. */
-  [].forEach.call(document.querySelectorAll('.logos img'), function (img) {
-    var fit = function () {
-      var ar = img.naturalWidth / img.naturalHeight || 3;
-      img.style.height = Math.round(Math.max(18, Math.min(44, Math.sqrt(3400 / ar))) * (+img.dataset.scale || 1)) + 'px';
-    };
-    if (img.complete) fit(); else img.addEventListener('load', fit);
-  });
+  /* Logo-Hoehe: h aus data.js (Handy 80 %); ohne h gleiche Flaeche fuer alle */
+  function sizeLogos() {
+    var k = innerWidth <= 880 ? 0.8 : 1;
+    [].forEach.call(document.querySelectorAll('.logos img'), function (img) {
+      var fit = function () {
+        var h = +img.dataset.h;
+        if (!h) { var ar = img.naturalWidth / img.naturalHeight || 3; h = Math.max(18, Math.min(44, Math.sqrt(3400 / ar))); }
+        img.style.height = Math.round(h * k) + 'px';
+      };
+      if (img.complete && img.naturalWidth) fit(); else img.addEventListener('load', fit);
+    });
+  }
+  sizeLogos();
+  addEventListener('resize', sizeLogos, { passive: true });
 
   $('#stats').innerHTML = SITE.stats.map(function (s) {
     return '<div><b>' + esc(s.big) + '</b><span class="eyebrow">' + esc(s.label) + '</span></div>';
