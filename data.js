@@ -72,9 +72,9 @@ const SITE = {
        Gibt es fuer einen Namen kein Logo, einfach nur in names eintragen. */
     { label: "Selected clients",
       logos: [
-        { file: "mercedes-benz.png",        name: "Mercedes-Benz", scale: 1.2 },
+        { file: "mercedes-benz.png",        name: "Mercedes-Benz", scale: 0.85 },
         { file: "mercedes-benz-museum.png", name: "Mercedes-Benz Museum", scale: 0.85 },
-        { file: "naspa.png",                name: "Nassauische Sparkasse" },
+        { file: "naspa.png",                name: "Nassauische Sparkasse", scale: 0.75 },
         { file: "jlu-giessen.png",          name: "Justus-Liebig-Universit\u00e4t Gie\u00dfen" }
       ],
       names: [] },

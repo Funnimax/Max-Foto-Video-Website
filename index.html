@@ -431,7 +431,7 @@ footer .wrap{display:flex;justify-content:space-between;font-size:12px;color:var
   [].forEach.call(document.querySelectorAll('.logos img'), function (img) {
     var fit = function () {
       var ar = img.naturalWidth / img.naturalHeight || 3;
-      img.style.height = Math.round(Math.max(18, Math.min(44, Math.sqrt(3400 / ar) * (+img.dataset.scale || 1)))) + 'px';
+      img.style.height = Math.round(Math.max(18, Math.min(44, Math.sqrt(3400 / ar))) * (+img.dataset.scale || 1)) + 'px';
     };
     if (img.complete) fit(); else img.addEventListener('load', fit);
   });
