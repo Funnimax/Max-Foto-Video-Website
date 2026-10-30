@@ -67,9 +67,17 @@ const SITE = {
   /* ---------- Auftraggeber und Veroeffentlichungen ----------
      Nur Namen, keine Logos. Neue Zeile hinzufuegen = Komma nicht vergessen. */
   credits: [
+    /* logos: liegen in media/clients/ - weiss auf transparent (PNG oder SVG).
+       scale: optional, falls ein Logo zu gross/klein wirkt (1 = normal).
+       Gibt es fuer einen Namen kein Logo, einfach nur in names eintragen. */
     { label: "Selected clients",
-      names: ["Mercedes-Benz", "Mercedes-Benz Museum", "Nassauische Sparkasse",
-              "Justus-Liebig-Universit\u00e4t Gie\u00dfen"] },
+      logos: [
+        { file: "mercedes-benz.png",        name: "Mercedes-Benz", scale: 1.2 },
+        { file: "mercedes-benz-museum.png", name: "Mercedes-Benz Museum", scale: 0.85 },
+        { file: "naspa.png",                name: "Nassauische Sparkasse" },
+        { file: "jlu-giessen.png",          name: "Justus-Liebig-Universit\u00e4t Gie\u00dfen" }
+      ],
+      names: [] },
     { label: "Published in",
       names: ["Auto Bild", "Stuttgarter Zeitung", "Sindelfinger Zeitung", "GV-Praxis"] }
   ],
