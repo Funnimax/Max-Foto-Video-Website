@@ -91,6 +91,15 @@ const SITE = {
     { title: "Event coverage",
       text: "On location, stills and motion from the same day. Photos within 24 hours, the first cut within 48." }
   ],
+
+  /* ---------- Software ----------
+     Steht unter den Leistungen. Gruppen und Programme frei aenderbar. */
+  tools: [
+    { group: "Edit & colour",     names: ["DaVinci Resolve Studio", "Adobe Premiere Pro", "X-Rite ColorChecker"] },
+    { group: "Motion & delivery", names: ["Adobe After Effects", "Adobe Media Encoder"] },
+    { group: "Photo",             names: ["Adobe Photoshop", "Adobe Lightroom Classic"] },
+    { group: "Sound",             names: ["DaVinci Fairlight"] }
+  ],
   /* ---------- FILME ----------
      size: "full" (ganze Breite, Kinoformat) | "wide" (7 von 12 Spalten) | "half" (5) | "third" (4)
            Pro Zeile sollte die Summe 12 ergeben.

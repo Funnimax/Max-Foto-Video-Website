@@ -177,6 +177,15 @@ section{padding:clamp(64px,10vh,132px) 0}
 .svc>article:hover{background:#121214}
 .svc h3{font-family:'Instrument Serif',Georgia,serif;font-weight:400;font-size:clamp(21px,2.2vw,30px);margin:14px 0 12px}
 .svc p{color:#a5a19c;font-size:13.5px;line-height:1.7}
+/* Software unter den Leistungen */
+.tools{display:grid;grid-template-columns:auto repeat(4,1fr);gap:20px 32px;margin-top:clamp(28px,4vh,44px);
+       padding-top:22px;border-top:1px solid var(--line);align-items:start}
+.tools>.eyebrow{padding-top:2px;padding-right:12px}
+.tools b{display:block;font-size:10px;letter-spacing:.22em;text-transform:uppercase;color:var(--mut);
+         font-weight:400;margin-bottom:9px}
+.tools ul{list-style:none;margin:0;padding:0}
+.tools li{font-size:14px;line-height:1.75;color:#cfcbc6}
+@media(max-width:880px){.tools{grid-template-columns:1fr 1fr}.tools>.eyebrow{grid-column:1/-1}}
 
 /* ========== KONTAKT / FOOTER ========== */
 .cta{text-align:center;padding:clamp(74px,13vh,160px) 0;border-top:1px solid var(--line)}
@@ -310,6 +319,7 @@ footer .wrap{display:flex;justify-content:space-between;font-size:12px;color:var
       <h2>How we can work together</h2>
     </div>
     <div class="svc r" id="svc"></div>
+    <div class="tools r" id="tools"></div>
   </div>
 </section>
 
@@ -456,6 +466,12 @@ footer .wrap{display:flex;justify-content:space-between;font-size:12px;color:var
     return '<article><span class="tag">' + ('0' + (i + 1)) + '</span><h3>' + esc(s.title) +
            '</h3><p>' + esc(s.text) + '</p></article>';
   }).join('');
+  if (SITE.tools && SITE.tools.length) {
+    $('#tools').innerHTML = '<span class="eyebrow">Toolkit</span>' + SITE.tools.map(function (t) {
+      return '<div><b>' + esc(t.group) + '</b><ul>' +
+             t.names.map(function (n) { return '<li>' + esc(n) + '</li>'; }).join('') + '</ul></div>';
+    }).join('');
+  } else $('#tools').remove();
 
   /* ---------- Filme ---------- */
   $('#filmGrid').innerHTML = SITE.films.map(function (f, i) {
