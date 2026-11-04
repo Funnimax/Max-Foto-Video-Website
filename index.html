@@ -184,7 +184,8 @@ section{padding:clamp(64px,10vh,132px) 0}
 .tools b{display:block;font-size:10px;letter-spacing:.22em;text-transform:uppercase;color:var(--mut);
          font-weight:400;margin-bottom:9px}
 .tools ul{list-style:none;margin:0;padding:0}
-.tools li{font-size:14px;line-height:1.75;color:#cfcbc6}
+.tools li{font-size:14px;line-height:1.4;color:#cfcbc6;display:flex;align-items:center;gap:11px;padding:5px 0}
+.tools li img{width:20px;height:20px;flex:0 0 20px;object-fit:contain;opacity:.88}
 @media(max-width:880px){.tools{grid-template-columns:1fr 1fr}.tools>.eyebrow{grid-column:1/-1}}
 
 /* ========== KONTAKT / FOOTER ========== */
@@ -363,6 +364,7 @@ footer .wrap{display:flex;justify-content:space-between;font-size:12px;color:var
     filmPoster:function (f) { return 'media/films/' + f + '-poster.jpg'; },
     about:     function (f) { return 'media/about/' + f; },
     client:    function (f) { return 'media/clients/' + f; },
+    tool:      function (f) { return 'media/tools/' + f; },
     thumb:     function (f) { return 'media/photos/thumbs/' + f; },
     full:      function (f) { return 'media/photos/full/' + f; }
   };
@@ -469,7 +471,11 @@ footer .wrap{display:flex;justify-content:space-between;font-size:12px;color:var
   if (SITE.tools && SITE.tools.length) {
     $('#tools').innerHTML = '<span class="eyebrow">Toolkit</span>' + SITE.tools.map(function (t) {
       return '<div><b>' + esc(t.group) + '</b><ul>' +
-             t.names.map(function (n) { return '<li>' + esc(n) + '</li>'; }).join('') + '</ul></div>';
+             t.names.map(function (n) {
+               if (typeof n === 'string') n = { name: n };
+               return '<li>' + (n.icon ? '<img src="' + esc(M.tool(n.icon)) + '" alt="" aria-hidden="true">' : '') +
+                      esc(n.name) + '</li>';
+             }).join('') + '</ul></div>';
     }).join('');
   } else $('#tools').remove();
 

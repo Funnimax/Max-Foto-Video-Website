@@ -93,12 +93,21 @@ const SITE = {
   ],
 
   /* ---------- Software ----------
-     Steht unter den Leistungen. Gruppen und Programme frei aenderbar. */
+     Steht unter den Leistungen. icon = Datei in media/tools/ (weiss, SVG).
+     Ohne icon steht nur der Name da. */
   tools: [
-    { group: "Edit & colour",     names: ["DaVinci Resolve Studio", "Adobe Premiere Pro", "X-Rite ColorChecker"] },
-    { group: "Motion & delivery", names: ["Adobe After Effects", "Adobe Media Encoder"] },
-    { group: "Photo",             names: ["Adobe Photoshop", "Adobe Lightroom Classic"] },
-    { group: "Sound",             names: ["DaVinci Fairlight"] }
+    { group: "Edit & colour", names: [
+        { name: "DaVinci Resolve Studio", icon: "davinci-resolve.svg" },
+        { name: "Adobe Premiere Pro",     icon: "premiere-pro.svg" },
+        { name: "X-Rite ColorChecker",    icon: "colorchecker.svg" } ] },
+    { group: "Motion & delivery", names: [
+        { name: "Adobe After Effects",    icon: "after-effects.svg" },
+        { name: "Adobe Media Encoder",    icon: "media-encoder.svg" } ] },
+    { group: "Photo", names: [
+        { name: "Adobe Photoshop",        icon: "photoshop.svg" },
+        { name: "Adobe Lightroom Classic", icon: "lightroom-classic.svg" } ] },
+    { group: "Sound", names: [
+        { name: "DaVinci Fairlight",      icon: "fairlight.svg" } ] }
   ],
   /* ---------- FILME ----------
      size: "full" (ganze Breite, Kinoformat) | "wide" (7 von 12 Spalten) | "half" (5) | "third" (4)
