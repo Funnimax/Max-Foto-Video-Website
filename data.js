@@ -165,6 +165,7 @@ const SITE = {
     { file: "Travel/img8-3.jpeg", r: 0.75, title: "Travel", hero: true },
 
     /* --- Alle weiteren Bilder: Galerie darunter, zeilenweise --- */
+    { file: "Travel/autumn-forest-01.jpg", r: 1.778 },
     { file: "Commercial/schmidt-bauelemente-01.jpg", r: 0.667, title: "Schmidt Bauelemente" },
     { file: "Automotive/eqs-01.jpg", r: 0.667, title: "Mercedes-Benz EQS" },
     { file: "Events/golf-01.jpg", r: 1.5, title: "Golf event" },
