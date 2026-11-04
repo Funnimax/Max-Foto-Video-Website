@@ -93,7 +93,7 @@ const SITE = {
   ],
 
   /* ---------- Software ----------
-     Steht unter den Leistungen. icon = Datei in media/tools/ (weiss, SVG).
+     Steht unter den Leistungen. icon = Datei in media/tools/ (SVG).
      Ohne icon steht nur der Name da. */
   tools: [
     { group: "Edit & colour", names: [
@@ -105,7 +105,8 @@ const SITE = {
         { name: "Adobe Media Encoder",    icon: "media-encoder.svg" } ] },
     { group: "Photo", names: [
         { name: "Adobe Photoshop",        icon: "photoshop.svg" },
-        { name: "Adobe Lightroom Classic", icon: "lightroom-classic.svg" } ] },
+        { name: "Adobe Lightroom Classic", icon: "lightroom-classic.svg" },
+        { name: "Adobe Lightroom",        icon: "lightroom.svg" } ] },
     { group: "Sound", names: [
         { name: "DaVinci Fairlight",      icon: "fairlight.svg" } ] }
   ],
